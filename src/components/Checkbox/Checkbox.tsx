@@ -80,7 +80,7 @@ const box = (checked: boolean, color: string, size: CheckboxSize) => css`
   display: block;
   width: 1em;
   height: 1em;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   border: 1px solid ${palette.grey[500]};
   margin-right: 0.5em;
   position: relative;
