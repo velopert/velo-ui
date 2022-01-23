@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { InputHTMLAttributes, useState } from 'react'
 import { palette } from '../../lib/palette'
 
-type InputSize = 'sm' | 'md' | 'lg'
+type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -58,9 +58,11 @@ function Input({
 }
 
 const sizes = {
+  xs: '0.75rem',
   sm: '0.875rem',
   md: '1rem',
   lg: '1.125rem',
+  xl: '1.3125rem',
 }
 
 interface InputOption {

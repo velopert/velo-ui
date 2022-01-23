@@ -5,7 +5,7 @@ import { rgba } from 'polished'
 
 type ButtonType = 'primary' | 'secondary' | 'destructive'
 type ButtonVariant = 'default' | 'outline' | 'ghost'
-type ButtonSize = 'sm' | 'md' | 'lg'
+type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface ButtonColorScheme {
   background: string
@@ -113,12 +113,11 @@ function Button({
       : schemes[type]
 
   const styles = [
-    buttonStyle,
+    buttonStyle(size),
     variant === 'default' && defaultStyle(scheme),
     variant === 'outline' && outlineStyle(scheme),
     variant === 'ghost' && ghostStyle(scheme),
     isFullWidth && fullWidthStyle,
-    sizes[size],
   ]
 
   const contents = (
@@ -219,32 +218,40 @@ const ghostStyle = (scheme: ButtonColorScheme) => css`
   }
 `
 
+// const sizes = {
+//   sm: css`
+//     height: 1.75rem;
+//     padding-left: 0.75rem;
+//     padding-right: 0.75rem;
+//     font-size: 0.875rem;
+//   `,
+//   md: css`
+//     height: 2.5rem;
+//     padding-left: 1rem;
+//     padding-right: 1rem;
+//     font-size: 1rem;
+//   `,
+//   lg: css`
+//     height: 3.125rem;
+//     padding-left: 1.125rem;
+//     padding-right: 1.125rem;
+//     font-size: 1.3125rem;
+//   `,
+// }
+
 const sizes = {
-  sm: css`
-    height: 1.75rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    font-size: 0.875rem;
-  `,
-  md: css`
-    height: 2.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 1rem;
-  `,
-  lg: css`
-    height: 3.125rem;
-    padding-left: 1.125rem;
-    padding-right: 1.125rem;
-    font-size: 1.3125rem;
-  `,
+  xs: '0.75rem',
+  sm: '0.875rem',
+  md: '1rem',
+  lg: '1.125rem',
+  xl: '1.3125rem',
 }
 
 const fullWidthStyle = css`
   width: 100%;
 `
 
-const buttonStyle = css`
+const buttonStyle = (size: ButtonSize) => css`
   border: none;
   outline: none;
   display: inline-flex;
@@ -255,6 +262,10 @@ const buttonStyle = css`
   cursor: pointer;
   font-weight: 500;
   font-family: inherit;
+  font-size: ${sizes[size]};
+  height: 2.5em;
+  padding-left: 1em;
+  padding-right: 1em;
 
   &:disabled {
     filter: grayscale(25%);

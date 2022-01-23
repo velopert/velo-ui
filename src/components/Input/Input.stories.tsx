@@ -21,9 +21,11 @@ Basic.args = {
 export const Size: InputStory = () => {
   return (
     <div css={wrapper}>
-      <Input size="sm" placeholder="Enter text..." />
-      <Input size="md" placeholder="Enter text..." />
-      <Input size="lg" placeholder="Enter text..." />
+      <Input size="xs" placeholder="X-Small" />
+      <Input size="sm" placeholder="Small" />
+      <Input size="md" placeholder="Medium" />
+      <Input size="lg" placeholder="Large" />
+      <Input size="xl" placeholder="X-Large" />
     </div>
   )
 }
