@@ -20,6 +20,19 @@ interface InputProps
    * Set this to `true` when you want to match the size with its parent element.
    */
   isFullWidth?: boolean
+
+  /**
+   * This prop will make the border and text color to red. Color is remained the same when even it is focused.
+   */
+  isError?: boolean
+  /**
+   * This message will shown below the input.
+   */
+  errorMessage?: string
+  /**
+   * Use this prop when you want to fix your input width.
+   */
+  fixedWidth?: string | number
 }
 
 function Input({
@@ -27,16 +40,28 @@ function Input({
   focusedColor = palette.teal[500],
   isFullWidth,
   disabled,
+  isError,
+  errorMessage,
+  fixedWidth,
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
 
   return (
-    <div css={wrapper(isFullWidth)}>
+    <div
+      css={[
+        wrapper(isFullWidth),
+        fixedWidth !== undefined &&
+          css({
+            width: fixedWidth,
+          }),
+      ]}
+    >
       <div
         css={[
-          inputBox({ size, disabled, isFullWidth }),
+          inputBox({ size, disabled, isError }),
           focused && focusedStyle(focusedColor),
+          isError && errorStyle,
         ]}
       >
         <input
@@ -53,6 +78,7 @@ function Input({
           {...rest}
         />
       </div>
+      {errorMessage && <div css={errorMessageStyle}>{errorMessage}</div>}
     </div>
   )
 }
@@ -65,21 +91,22 @@ const sizes = {
   xl: '1.3125rem',
 }
 
-interface InputOption {
-  size: InputSize
-  isFullWidth?: boolean
-  disabled?: boolean
-}
-
 const wrapper = (isFullWidth?: boolean) => css`
   display: inline-flex;
+  flex-direction: column;
   ${isFullWidth &&
   css`
     width: 100%;
   `}
 `
 
-const inputBox = ({ size, disabled }: InputOption) => css`
+interface InputOption {
+  size: InputSize
+  isError?: boolean
+  disabled?: boolean
+}
+
+const inputBox = ({ size, disabled, isError }: InputOption) => css`
   width: 100%;
   border: 1px solid ${palette.grey[300]};
   font-size: ${sizes[size]};
@@ -98,6 +125,16 @@ const inputBox = ({ size, disabled }: InputOption) => css`
       cursor: not-allowed;
     }
   `}
+`
+
+const errorStyle = css`
+  border: 1px solid ${palette.red[500]};
+  color: ${palette.red[500]};
+  input {
+    &::placeholder {
+      color: ${palette.red[200]};
+    }
+  }
 `
 
 const focusedStyle = (color: string) => css`
@@ -123,6 +160,12 @@ const inputStyle = css`
   &::placeholder {
     color: ${palette.grey[400]};
   }
+`
+
+const errorMessageStyle = css`
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: ${palette.red[500]};
 `
 
 export default Input

@@ -47,6 +47,17 @@ export const Disabled: InputStory = () => {
   return <Input disabled placeholder="Disabled" />
 }
 
+export const Error: InputStory = () => {
+  return (
+    <Input
+      placeholder="velo.ui@gmail.com"
+      isError
+      errorMessage="A valid email address is required"
+      fixedWidth="20rem"
+    />
+  )
+}
+
 const wrapper = css`
   display: flex;
   gap: 1rem;
