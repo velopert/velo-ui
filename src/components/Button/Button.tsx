@@ -218,27 +218,6 @@ const ghostStyle = (scheme: ButtonColorScheme) => css`
   }
 `
 
-// const sizes = {
-//   sm: css`
-//     height: 1.75rem;
-//     padding-left: 0.75rem;
-//     padding-right: 0.75rem;
-//     font-size: 0.875rem;
-//   `,
-//   md: css`
-//     height: 2.5rem;
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//     font-size: 1rem;
-//   `,
-//   lg: css`
-//     height: 3.125rem;
-//     padding-left: 1.125rem;
-//     padding-right: 1.125rem;
-//     font-size: 1.3125rem;
-//   `,
-// }
-
 const sizes = {
   xs: '0.75rem',
   sm: '0.875rem',
