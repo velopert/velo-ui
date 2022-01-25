@@ -56,6 +56,7 @@ const sizes = {
 const wrapper = (color: string, size: CheckboxSize) => css`
   position: relative;
   display: inline-flex;
+  align-items: center;
 
   cursor: pointer;
   font-size: ${sizes[size]};
@@ -78,8 +79,8 @@ const box = (checked: boolean, color: string, size: CheckboxSize) => css`
   align-items: center;
   justify-content: center;
   display: block;
-  width: 1em;
-  height: 1em;
+  width: 1.125em;
+  height: 1.125em;
   border-radius: 0.25rem;
   border: 1px solid ${palette.grey[500]};
   margin-right: 0.5em;
