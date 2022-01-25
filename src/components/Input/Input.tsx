@@ -132,7 +132,7 @@ const errorStyle = css`
   color: ${palette.red[500]};
   input {
     &::placeholder {
-      color: ${palette.red[200]};
+      color: ${palette.red[100]};
     }
   }
 `
