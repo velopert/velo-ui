@@ -43,6 +43,8 @@ interface InputProps
    * Sets the id to the input element.
    */
   id?: string
+  icon?: React.ReactNode
+  iconPosition?: 'left' | 'right'
 }
 
 function Input({
@@ -54,6 +56,8 @@ function Input({
   errorMessage,
   fixedWidth,
   label,
+  icon,
+  iconPosition = 'left',
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
@@ -61,12 +65,17 @@ function Input({
   return (
     <div
       css={[
-        wrapper(isFullWidth),
+        wrapper(size, isFullWidth),
         fixedWidth !== undefined &&
           css({
             width: fixedWidth,
           }),
       ]}
+      onClick={(e) => {
+        const input = e.currentTarget.querySelector('input')
+        if (!input) return
+        input.focus()
+      }}
     >
       {label !== undefined && (
         <label
@@ -87,11 +96,14 @@ function Input({
       )}
       <div
         css={[
-          inputBox({ size, disabled, isError }),
+          inputBox(disabled),
           focused && focusedStyle(focusedColor),
           isError && errorStyle,
         ]}
       >
+        {icon && iconPosition === 'left' && (
+          <div css={iconStyle(iconPosition)}>{icon}</div>
+        )}
         <input
           css={inputStyle}
           onFocus={(e) => {
@@ -105,6 +117,9 @@ function Input({
           disabled={disabled}
           {...rest}
         />
+        {icon && iconPosition === 'right' && (
+          <div css={iconStyle(iconPosition)}>{icon}</div>
+        )}
       </div>
       {errorMessage && <div css={errorMessageStyle}>{errorMessage}</div>}
     </div>
@@ -119,37 +134,37 @@ const sizes = {
   xl: '1.3125rem',
 }
 
-const wrapper = (isFullWidth?: boolean) => css`
+const wrapper = (size: InputSize, isFullWidth?: boolean) => css`
   display: inline-flex;
   flex-direction: column;
   ${isFullWidth &&
   css`
     width: 100%;
   `}
+  font-size: ${sizes[size]};
 `
 
 const labelStyle = css`
-  font-size: 0.75rem;
+  font-size: 0.75em;
   font-weight: 500;
   color: ${palette.grey[600]};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5em;
   transition: 0.125s all ease-in;
 `
-interface InputOption {
-  size: InputSize
-  isError?: boolean
-  disabled?: boolean
-}
 
-const inputBox = ({ size, disabled, isError }: InputOption) => css`
+const inputBox = (disabled?: boolean) => css`
   width: 100%;
   border: 1px solid ${palette.grey[300]};
-  font-size: ${sizes[size]};
+
   transition: 0.125s all ease-in;
   ${palette.grey[800]};
   display: inline-flex;
   border-radius: 0.25rem;
   background: white;
+  padding-left: 0.875em;
+  padding-right: 0.875em;
+  align-items: center;
+  cursor: text;
 
   ${disabled &&
   css`
@@ -183,8 +198,6 @@ const inputStyle = css`
   padding: 0;
   outline: none;
   height: 2.5em;
-  padding-left: 0.875em;
-  padding-right: 0.875em;
   background: transparent;
 
   color: inherit;
@@ -199,8 +212,24 @@ const inputStyle = css`
 
 const errorMessageStyle = css`
   margin-top: 0.25rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: ${palette.red[500]};
+  display: flex;
+  align-items: center;
+`
+
+const iconStyle = (position: 'left' | 'right' = 'left') => css`
+  svg {
+    color: inherit;
+    width: 1.25em;
+    ${position === 'left'
+      ? css`
+          margin-right: 0.5rem;
+        `
+      : css`
+          margin-left: 0.5rem;
+        `}
+  }
 `
 
 export default Input

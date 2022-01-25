@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { palette } from '../../lib/palette'
+import Icon from '../Icon'
 import Input from './Input'
 
 export default {
@@ -52,7 +53,7 @@ export const Error: InputStory = () => {
     <Input
       placeholder="velo.ui@gmail.com"
       isError
-      errorMessage="A valid email address is required"
+      errorMessage="This email is not valid"
       fixedWidth="20rem"
     />
   )
@@ -61,13 +62,38 @@ export const Error: InputStory = () => {
 export const WithLabel: InputStory = () => {
   return (
     <div css={wrapper}>
-      <Input label="Email" placeholder="velo.ui@gmail.com" fixedWidth="20rem" />
+      <Input label="Email" placeholder="velo.ui@gmail.com" size="xs" />
+      <Input label="Email" placeholder="velo.ui@gmail.com" />
+      <Input label="Email" placeholder="velo.ui@gmail.com" size="lg" />
       <Input
         label="Email"
         placeholder="velo.ui@gmail.com"
         isError
-        errorMessage="A valid email address is required"
-        fixedWidth="20rem"
+        errorMessage="This email is not valid"
+      />
+    </div>
+  )
+}
+
+export const WithIcon: InputStory = () => {
+  return (
+    <div css={wrapper}>
+      <Input placeholder="Search something..." icon={<Icon name="search" />} />
+      <Input
+        placeholder="Search something..."
+        icon={<Icon name="search" />}
+        disabled
+      />
+      <Input
+        placeholder="Search something..."
+        icon={<Icon name="search" />}
+        size="lg"
+      />
+      <Input
+        placeholder="Search something..."
+        icon={<Icon name="search" />}
+        iconPosition="right"
+        size="xl"
       />
     </div>
   )
