@@ -90,8 +90,8 @@ const box = (checked: boolean, color: string, size: CheckboxSize) => css`
     position: absolute;
     transform: translate(-50%, -50%);
     display: block;
-    width: 0.875em;
-    height: 0.875em;
+    width: 0.625em;
+    height: 0.625em;
   }
 
   ${checked &&

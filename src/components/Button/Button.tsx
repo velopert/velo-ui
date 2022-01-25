@@ -235,7 +235,7 @@ const buttonStyle = (size: ButtonSize) => css`
   align-items: center;
   justify-content: center;
 
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-weight: 500;
   font-family: inherit;
