@@ -33,6 +33,16 @@ interface InputProps
    * Use this prop when you want to fix your input width.
    */
   fixedWidth?: string | number
+  /**
+   * If a label is set, the label text will be shown on the top of the input.
+   * Label color changes as the input is focused, or error occurs.
+   * `for` attribute of the label is set to the input `id`.
+   */
+  label?: string
+  /**
+   * Sets the id to the input element.
+   */
+  id?: string
 }
 
 function Input({
@@ -43,6 +53,7 @@ function Input({
   isError,
   errorMessage,
   fixedWidth,
+  label,
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
@@ -57,6 +68,23 @@ function Input({
           }),
       ]}
     >
+      {label !== undefined && (
+        <label
+          css={[
+            labelStyle,
+            focused &&
+              css({
+                color: focusedColor,
+              }),
+            isError &&
+              css({
+                color: palette.red[500],
+              }),
+          ]}
+        >
+          {label}
+        </label>
+      )}
       <div
         css={[
           inputBox({ size, disabled, isError }),
@@ -100,6 +128,13 @@ const wrapper = (isFullWidth?: boolean) => css`
   `}
 `
 
+const labelStyle = css`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${palette.grey[600]};
+  margin-bottom: 0.5rem;
+  transition: 0.125s all ease-in;
+`
 interface InputOption {
   size: InputSize
   isError?: boolean
@@ -114,7 +149,7 @@ const inputBox = ({ size, disabled, isError }: InputOption) => css`
   ${palette.grey[800]};
   display: inline-flex;
   border-radius: 0.25rem;
-  backgruond: white;
+  background: white;
 
   ${disabled &&
   css`

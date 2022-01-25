@@ -58,6 +58,21 @@ export const Error: InputStory = () => {
   )
 }
 
+export const WithLabel: InputStory = () => {
+  return (
+    <div css={wrapper}>
+      <Input label="Email" placeholder="velo.ui@gmail.com" fixedWidth="20rem" />
+      <Input
+        label="Email"
+        placeholder="velo.ui@gmail.com"
+        isError
+        errorMessage="A valid email address is required"
+        fixedWidth="20rem"
+      />
+    </div>
+  )
+}
+
 const wrapper = css`
   display: flex;
   gap: 1rem;
