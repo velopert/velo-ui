@@ -55,10 +55,14 @@ interface ButtonProps
    */
   isStickIconToEnd?: boolean
   /**
-   * Set the icon of the button that is shown at the left
-   * The icon should be a `svg` element. If not, you have to set the size of the icon manually
+   * Shows icon at left or right side of button.
+   * Set the position by `iconPosition` prop.
    */
-  leftIcon?: React.ReactNode
+  icon?: React.ReactNode
+  /**
+   * Icon is shown at left by default.
+   */
+  iconPosition?: 'left' | 'right'
   /**
    * Set the icon of the button that is shown at the right
    * The icon should be a `svg` element. If not, you have to set the size of the icon manually
@@ -101,8 +105,8 @@ function Button({
   size = 'md',
   isFullWidth,
   isStickIconToEnd,
-  leftIcon,
-  rightIcon,
+  iconPosition = 'left',
+  icon,
   asLink,
   href,
   ...rest
@@ -122,12 +126,12 @@ function Button({
 
   const contents = (
     <>
-      {leftIcon !== undefined && (
-        <div css={iconWrapperStyle('left', isStickIconToEnd)}>{leftIcon}</div>
+      {icon && iconPosition === 'left' && (
+        <div css={iconWrapperStyle('left', isStickIconToEnd)}>{icon}</div>
       )}
       {isStickIconToEnd ? <div css={takeFullWidth}>{children}</div> : children}
-      {rightIcon !== undefined && (
-        <div css={iconWrapperStyle('right', isStickIconToEnd)}>{rightIcon}</div>
+      {icon && iconPosition === 'right' && (
+        <div css={iconWrapperStyle('right', isStickIconToEnd)}>{icon}</div>
       )}
     </>
   )
@@ -142,13 +146,7 @@ function Button({
 
   return (
     <button css={styles} {...rest}>
-      {leftIcon !== undefined && (
-        <div css={iconWrapperStyle('left', isStickIconToEnd)}>{leftIcon}</div>
-      )}
-      {isStickIconToEnd ? <div css={takeFullWidth}>{children}</div> : children}
-      {rightIcon !== undefined && (
-        <div css={iconWrapperStyle('right', isStickIconToEnd)}>{rightIcon}</div>
-      )}
+      {contents}
     </button>
   )
 }

@@ -128,36 +128,45 @@ export function WithIcon() {
   return (
     <div>
       <div css={wrapper}>
-        <Button leftIcon={<Icon name="upload" />}>Upload</Button>
-        <Button variant="ghost" leftIcon={<Icon name="back" />}>
+        <Button icon={<Icon name="upload" />}>Upload</Button>
+        <Button variant="ghost" icon={<Icon name="back" />}>
           Back
         </Button>
-        <Button type="destructive" rightIcon={<Icon name="exit" />}>
+        <Button
+          type="destructive"
+          icon={<Icon name="exit" />}
+          iconPosition="right"
+        >
           Delete
         </Button>
       </div>
       <div css={wrapper}>
-        <Button size="sm" leftIcon={<Icon name="plane" />} variant="outline">
+        <Button size="sm" icon={<Icon name="plane" />} variant="outline">
           Send
         </Button>
       </div>
       <div css={wrapper}>
-        <Button size="lg" leftIcon={<Icon name="check" />}>
+        <Button size="lg" icon={<Icon name="check" />}>
           Save
         </Button>
       </div>
       <div css={wrapper}>
-        <Button leftIcon={<Icon name="check" />} isFullWidth>
+        <Button icon={<Icon name="check" />} isFullWidth>
           Save
         </Button>
       </div>
       <div css={wrapper}>
-        <Button leftIcon={<Icon name="check" />} isFullWidth isStickIconToEnd>
+        <Button icon={<Icon name="check" />} isFullWidth isStickIconToEnd>
           Save
         </Button>
       </div>
       <div css={wrapper}>
-        <Button rightIcon={<Icon name="check" />} isFullWidth isStickIconToEnd>
+        <Button
+          icon={<Icon name="check" />}
+          isFullWidth
+          isStickIconToEnd
+          iconPosition="right"
+        >
           Save
         </Button>
       </div>
