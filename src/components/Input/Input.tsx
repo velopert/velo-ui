@@ -161,8 +161,8 @@ const inputBox = (disabled?: boolean) => css`
   display: inline-flex;
   border-radius: 0.5rem;
   background: white;
-  padding-left: 0.875em;
-  padding-right: 0.875em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
   align-items: center;
   cursor: text;
 
