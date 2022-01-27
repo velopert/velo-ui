@@ -99,6 +99,15 @@ export const WithIcon: InputStory = () => {
   )
 }
 
+export const Password: InputStory = () => {
+  return (
+    <div css={wrapper}>
+      <Input type="password" />
+      <Input type="password" disablePlainPassword />
+    </div>
+  )
+}
+
 const wrapper = css`
   display: flex;
   gap: 1rem;

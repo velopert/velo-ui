@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { InputHTMLAttributes, useState } from 'react'
+import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { palette } from '../../lib/palette'
+import Icon from '../Icon'
 
 type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
@@ -44,6 +45,10 @@ interface InputProps
    */
   id?: string
   icon?: React.ReactNode
+  /**
+   * Hides eye icon when input `type` is `password`
+   */
+  disablePlainPassword?: boolean
   iconPosition?: 'left' | 'right'
 }
 
@@ -58,9 +63,22 @@ function Input({
   label,
   icon,
   iconPosition = 'left',
+  type,
+  disablePlainPassword,
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
+  const [plainMode, setPlainMode] = useState(type !== 'password')
+  const ref = useRef<HTMLInputElement>(null)
+  const cursorPosRef = useRef(0)
+
+  useEffect(() => {
+    if (cursorPosRef.current === 0) return
+    if (ref.current) {
+      ref.current.focus()
+      ref.current.selectionStart = cursorPosRef.current
+    }
+  }, [plainMode])
 
   return (
     <div
@@ -114,11 +132,35 @@ function Input({
             rest.onBlur?.(e)
             setFocused(false)
           }}
+          onMouseUp={(e) => {
+            cursorPosRef.current = e.currentTarget.selectionStart ?? 0
+            rest.onMouseUp?.(e)
+          }}
+          onChange={(e) => {
+            cursorPosRef.current = e.target.selectionStart ?? 0
+            rest.onChange?.(e)
+          }}
           disabled={disabled}
+          type={plainMode ? 'text' : type}
+          ref={ref}
           {...rest}
         />
         {icon && iconPosition === 'right' && (
           <div css={iconStyle(iconPosition)}>{icon}</div>
+        )}
+        {type === 'password' && !disablePlainPassword && (
+          <div
+            css={[iconStyle('right'), eyeStyle(focusedColor)]}
+            onClick={(e) => {
+              if (ref.current?.value === '') {
+                ref.current.focus()
+              }
+              setPlainMode(!plainMode)
+              e.stopPropagation()
+            }}
+          >
+            <Icon name={plainMode ? 'eye_off' : 'eye'} />
+          </div>
         )}
       </div>
       {errorMessage && <div css={errorMessageStyle}>{errorMessage}</div>}
@@ -229,6 +271,16 @@ const iconStyle = (position: 'left' | 'right' = 'left') => css`
       : css`
           margin-left: 0.5rem;
         `}
+  }
+`
+
+const eyeStyle = (color: string) => css`
+  cursor: pointer;
+  color: ${palette.grey[400]};
+  svg {
+    &:hover {
+      color: ${color};
+    }
   }
 `
 
