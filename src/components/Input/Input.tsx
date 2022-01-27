@@ -159,7 +159,7 @@ const inputBox = (disabled?: boolean) => css`
   transition: 0.125s all ease-in;
   ${palette.grey[800]};
   display: inline-flex;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: white;
   padding-left: 0.875em;
   padding-right: 0.875em;
