@@ -103,6 +103,7 @@ export const Password: InputStory = () => {
   return (
     <div css={wrapper}>
       <Input type="password" />
+      <Input type="password" size="lg" />
       <Input type="password" disablePlainPassword />
     </div>
   )
