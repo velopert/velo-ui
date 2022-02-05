@@ -2,22 +2,58 @@ import { css } from '@emotion/react'
 import { InputHTMLAttributes, useState } from 'react'
 import { palette } from '../../lib/palette'
 import { rgba } from 'polished'
+import { useRadioGroup } from '../RadioGroup/RadioGroup'
 
 type RadioSize = 'sm' | 'md' | 'lg'
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  /**
+   * Set the description of the radio button with this prop
+   */
   children: string
   size?: RadioSize
+  /**
+   * Setting this prop to true will make the radio button active
+   */
+  checked?: boolean
+  /**
+   * Function called when checked state of the input changes
+   */
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  /**
+   * Customize actve, focus, hover color
+   */
+  color?: string
 }
 
-function Radio({ children, size = 'sm', checked, ...rest }: Props) {
+/**
+ * `Radio` is used to select one of the item in a group.
+ *
+ *
+ * If you wrap multiple `Radio` with `Radio.Group` component, you do not have to set `checked` and `onChange` manually.
+ */
+function Radio({
+  children,
+  size = 'sm',
+  checked,
+  onChange,
+  color = palette.teal[500],
+  ...rest
+}: Props) {
   const [focused, setFocused] = useState(false)
+  const { value, onChangeValue } = useRadioGroup()
+  const isChecked = checked || value === rest.value
+
   return (
-    <label css={wrapper(size)}>
+    <label css={wrapper(size, color)}>
       <input
         type="radio"
         {...rest}
-        checked={checked}
+        onChange={(e) => {
+          onChange?.(e)
+          onChangeValue?.(e.target.value)
+        }}
+        checked={isChecked}
         onFocus={(e) => {
           setFocused(true)
         }}
@@ -25,8 +61,8 @@ function Radio({ children, size = 'sm', checked, ...rest }: Props) {
           setFocused(false)
         }}
       />
-      <span css={circle(!!checked, focused)}>
-        <span css={smallDot(checked)}></span>
+      <span css={circle(!!isChecked, focused, color)}>
+        <span css={smallDot(isChecked)}></span>
       </span>
       <span>{children}</span>
     </label>
@@ -39,11 +75,12 @@ const sizes = {
   lg: '1.5rem',
 }
 
-const wrapper = (size: RadioSize) => css`
+const wrapper = (size: RadioSize, color: string) => css`
   position: relative;
   font-size: ${sizes[size]};
   display: flex;
   align-items: center;
+  color: ${palette.grey[800]};
   cursor: pointer;
   input {
     position: absolute;
@@ -56,7 +93,7 @@ const wrapper = (size: RadioSize) => css`
 
   &:hover {
     span:first-of-type {
-      border-color: ${palette.teal[500]};
+      border-color: ${color};
     }
   }
   &:focus {
@@ -64,7 +101,7 @@ const wrapper = (size: RadioSize) => css`
   }
 `
 
-const circle = (checked: boolean, focused: boolean) => css`
+const circle = (checked: boolean, focused: boolean, color: string) => css`
   width: 1.125em;
   height: 1.125em;
   border-radius: 50%;
@@ -77,13 +114,13 @@ const circle = (checked: boolean, focused: boolean) => css`
   justify-content: center;
   ${checked &&
   css`
-    border-color: ${palette.teal[500]};
-    background: ${palette.teal[500]};
+    border-color: ${color};
+    background: ${color};
   `}
 
   ${focused &&
   css`
-    box-shadow: 0 0 0 0.25em ${rgba(palette.teal[500], 0.4)};
+    box-shadow: 0 0 0 0.25em ${rgba(color, 0.4)};
   `}
 `
 
