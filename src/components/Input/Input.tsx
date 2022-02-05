@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { useMemo } from 'react'
 import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { palette } from '../../lib/palette'
 import Icon from '../Icon'
@@ -49,6 +50,16 @@ interface InputProps
    * Hides eye icon when input `type` is `password`
    */
   disablePlainPassword?: boolean
+  /**
+   * Shows an element left to the input
+   * Currently, only text is supported.
+   */
+  leftAddon?: React.ReactNode
+  /**
+   * Shows an element left to the input
+   * Text, Button are supported
+   */
+  rightAddon?: React.ReactNode
   iconPosition?: 'left' | 'right'
 }
 
@@ -65,6 +76,9 @@ function Input({
   iconPosition = 'left',
   type,
   disablePlainPassword,
+  className,
+  rightAddon,
+  leftAddon,
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
@@ -80,6 +94,31 @@ function Input({
     }
   }, [plainMode])
 
+  const leftAddonEl = useMemo(() => {
+    if (!leftAddon) return null
+    if (typeof leftAddon === 'string') {
+      return <div css={textAddon('left')}>{leftAddon}</div>
+    }
+    return null
+  }, [leftAddon])
+
+  const rightAddonEl = useMemo(() => {
+    if (!rightAddon) return null
+    if (typeof rightAddon === 'string') {
+      return <div css={textAddon('right')}>{rightAddon}</div>
+    }
+    return (
+      <div
+        css={rightAddonStyle}
+        onClick={(e) => {
+          e.stopPropagation()
+        }}
+      >
+        {rightAddon}
+      </div>
+    )
+  }, [rightAddon])
+
   return (
     <div
       css={[
@@ -94,6 +133,7 @@ function Input({
         if (!input) return
         input.focus()
       }}
+      className={className}
     >
       {label !== undefined && (
         <label
@@ -112,56 +152,62 @@ function Input({
           {label}
         </label>
       )}
-      <div
-        css={[
-          inputBox(disabled),
-          focused && focusedStyle(focusedColor),
-          isError && errorStyle,
-        ]}
-      >
-        {icon && iconPosition === 'left' && (
-          <div css={iconStyle(iconPosition)}>{icon}</div>
-        )}
-        <input
-          css={inputStyle}
-          onFocus={(e) => {
-            rest.onFocus?.(e)
-            setFocused(true)
-          }}
-          onBlur={(e) => {
-            rest.onBlur?.(e)
-            setFocused(false)
-          }}
-          onMouseUp={(e) => {
-            cursorPosRef.current = e.currentTarget.selectionStart ?? 0
-            rest.onMouseUp?.(e)
-          }}
-          onChange={(e) => {
-            cursorPosRef.current = e.target.selectionStart ?? 0
-            rest.onChange?.(e)
-          }}
-          disabled={disabled}
-          type={plainMode ? 'text' : type}
-          ref={ref}
-          {...rest}
-        />
-        {icon && iconPosition === 'right' && (
-          <div css={iconStyle(iconPosition)}>{icon}</div>
-        )}
-        {type === 'password' && !disablePlainPassword && (
-          <div
-            css={[iconStyle('right'), eyeStyle(focusedColor)]}
-            onClick={(e) => {
-              if (ref.current?.value === '') {
-                ref.current.focus()
-              }
-              setPlainMode(!plainMode)
-              e.stopPropagation()
+      <div css={wrapperForAddons}>
+        {leftAddonEl}
+        <div
+          css={[
+            inputBox(disabled),
+            focused && focusedStyle(focusedColor),
+            isError && errorStyle,
+            rightAddon && noBorderRadius('right'),
+            leftAddon && noBorderRadius('left'),
+          ]}
+        >
+          {icon && iconPosition === 'left' && (
+            <div css={iconStyle(iconPosition)}>{icon}</div>
+          )}
+          <input
+            css={inputStyle}
+            onFocus={(e) => {
+              rest.onFocus?.(e)
+              setFocused(true)
             }}
-          >
-            <Icon name={plainMode ? 'eye_off' : 'eye'} />
-          </div>
-        )}
+            onBlur={(e) => {
+              rest.onBlur?.(e)
+              setFocused(false)
+            }}
+            onMouseUp={(e) => {
+              cursorPosRef.current = e.currentTarget.selectionStart ?? 0
+              rest.onMouseUp?.(e)
+            }}
+            onChange={(e) => {
+              cursorPosRef.current = e.target.selectionStart ?? 0
+              rest.onChange?.(e)
+            }}
+            disabled={disabled}
+            type={plainMode ? 'text' : type}
+            ref={ref}
+            {...rest}
+          />
+          {icon && iconPosition === 'right' && (
+            <div css={iconStyle(iconPosition)}>{icon}</div>
+          )}
+          {type === 'password' && !disablePlainPassword && (
+            <div
+              css={[iconStyle('right'), eyeStyle(focusedColor)]}
+              onClick={(e) => {
+                if (ref.current?.value === '') {
+                  ref.current.focus()
+                }
+                setPlainMode(!plainMode)
+                e.stopPropagation()
+              }}
+            >
+              <Icon name={plainMode ? 'eye_off' : 'eye'} />
+            </div>
+          )}
+        </div>
+        {rightAddonEl}
       </div>
       {errorMessage && <div css={errorMessageStyle}>{errorMessage}</div>}
     </div>
@@ -201,7 +247,7 @@ const inputBox = (disabled?: boolean) => css`
   transition: 0.125s all ease-in;
   ${palette.grey[800]};
   display: inline-flex;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   background: white;
   padding-left: 0.75em;
   padding-right: 0.75em;
@@ -217,6 +263,11 @@ const inputBox = (disabled?: boolean) => css`
       cursor: not-allowed;
     }
   `}
+`
+
+const noBorderRadius = (position: 'left' | 'right') => css`
+  border-top-${position}-radius: 0;
+  border-bottom-${position}-radius: 0;
 `
 
 const errorStyle = css`
@@ -239,7 +290,7 @@ const inputStyle = css`
   font-size: 1em;
   padding: 0;
   outline: none;
-  height: 2.5em;
+  height: calc(2.5em - 2px);
   background: transparent;
 
   color: inherit;
@@ -282,6 +333,31 @@ const eyeStyle = (color: string) => css`
       color: ${color};
     }
   }
+`
+
+const wrapperForAddons = css`
+  width: 100%;
+  display: flex;
+`
+
+const rightAddonStyle = css`
+  & > * {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
+`
+
+const textAddon = (position: 'left' | 'right') => css`
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  display: flex;
+  align-items: center;
+  background: ${palette.grey[100]};
+  border: 1px solid ${palette.grey[300]};
+  border-left: none;
+  font-size: 1em;
+  border-top-${position}-radius: 0.25rem;
+  border-bottom-${position}-radius: 0.25rem;
 `
 
 export default Input

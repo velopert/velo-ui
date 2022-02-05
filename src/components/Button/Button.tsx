@@ -87,6 +87,10 @@ interface ButtonProps
    * `target` attribute of `a` element if you enable `asLink`
    */
   target?: React.HTMLAttributeAnchorTarget
+  /**
+   * Sets width equal to height
+   */
+  isSquare?: boolean
 }
 
 /**
@@ -109,6 +113,7 @@ function Button({
   icon,
   asLink,
   href,
+  isSquare,
   ...rest
 }: ButtonProps) {
   const scheme =
@@ -117,7 +122,7 @@ function Button({
       : schemes[type]
 
   const styles = [
-    buttonStyle(size),
+    buttonStyle(size, isSquare),
     variant === 'default' && defaultStyle(scheme),
     variant === 'outline' && outlineStyle(scheme),
     variant === 'ghost' && ghostStyle(scheme),
@@ -228,14 +233,14 @@ const fullWidthStyle = css`
   width: 100%;
 `
 
-const buttonStyle = (size: ButtonSize) => css`
+const buttonStyle = (size: ButtonSize, isSquare?: boolean) => css`
   border: none;
   outline: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   cursor: pointer;
   font-weight: 500;
   font-family: inherit;
@@ -255,6 +260,12 @@ const buttonStyle = (size: ButtonSize) => css`
   }
 
   transition: 0.1s background ease-in, 0.1s color ease-in;
+
+  ${isSquare &&
+  css`
+    padding: 0;
+    width: 2.5em;
+  `}
 `
 
 const iconWrapperStyle = (

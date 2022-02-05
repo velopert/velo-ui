@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { palette } from '../../lib/palette'
+import Button from '../Button'
 import Icon from '../Icon'
 import Input from './Input'
 
@@ -42,6 +43,16 @@ export const FocusedColor: InputStory = () => {
 
 export const FullWidth: InputStory = () => {
   return <Input isFullWidth placeholder="Full Width" />
+}
+
+export const FixedWidth: InputStory = () => {
+  return (
+    <div css={wrapper}>
+      <Input fixedWidth="10rem" placeholder="Fixed Width" />
+      <Input fixedWidth="15rem" placeholder="Fixed Width" />
+      <Input fixedWidth="20rem" placeholder="Fixed Width" />
+    </div>
+  )
 }
 
 export const Disabled: InputStory = () => {
@@ -105,6 +116,29 @@ export const Password: InputStory = () => {
       <Input type="password" />
       <Input type="password" size="lg" />
       <Input type="password" disablePlainPassword />
+    </div>
+  )
+}
+
+export const Addons: InputStory = () => {
+  return (
+    <div css={wrapper}>
+      <Input
+        label="With Button Addon"
+        rightAddon={
+          <Button isSquare>
+            <Icon name="plane" width="1.125rem" height="1.125rem" />
+            {/* <svg></svg> */}
+          </Button>
+        }
+      />
+      <Input label="With Text Addon (right)" rightAddon=".com" />
+      <Input label="With Text Addon (left)" leftAddon="/@username/" />
+      <Input
+        label="With Text Addon (both)"
+        leftAddon="https://"
+        rightAddon=".com"
+      />
     </div>
   )
 }
