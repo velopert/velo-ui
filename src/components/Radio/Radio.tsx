@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
 import { palette } from '../../lib/palette'
+import { rgba } from 'polished'
 
 type RadioSize = 'sm' | 'md' | 'lg'
 
@@ -10,11 +11,21 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
 }
 
 function Radio({ children, size = 'sm', checked, ...rest }: Props) {
-  console.log(checked)
+  const [focused, setFocused] = useState(false)
   return (
     <label css={wrapper(size)}>
-      <input type="radio" {...rest} checked={checked} />
-      <span css={circle(!!checked)}>
+      <input
+        type="radio"
+        {...rest}
+        checked={checked}
+        onFocus={(e) => {
+          setFocused(true)
+        }}
+        onBlur={(e) => {
+          setFocused(false)
+        }}
+      />
+      <span css={circle(!!checked, focused)}>
         <span css={smallDot(checked)}></span>
       </span>
       <span>{children}</span>
@@ -48,9 +59,12 @@ const wrapper = (size: RadioSize) => css`
       border-color: ${palette.teal[500]};
     }
   }
+  &:focus {
+    opacity: 0.4;
+  }
 `
 
-const circle = (checked: boolean) => css`
+const circle = (checked: boolean, focused: boolean) => css`
   width: 1.125em;
   height: 1.125em;
   border-radius: 50%;
@@ -65,6 +79,11 @@ const circle = (checked: boolean) => css`
   css`
     border-color: ${palette.teal[500]};
     background: ${palette.teal[500]};
+  `}
+
+  ${focused &&
+  css`
+    box-shadow: 0 0 0 0.25em ${rgba(palette.teal[500], 0.4)};
   `}
 `
 
