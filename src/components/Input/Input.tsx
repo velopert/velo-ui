@@ -252,6 +252,7 @@ const inputBox = (disabled?: boolean) => css`
   padding-left: 0.75em;
   padding-right: 0.75em;
   align-items: center;
+  height: 2.5rem;
   cursor: text;
 
   ${disabled &&
@@ -290,7 +291,7 @@ const inputStyle = css`
   font-size: 1em;
   padding: 0;
   outline: none;
-  height: calc(2.5em - 2px);
+  height: 100%;
   background: transparent;
 
   color: inherit;
@@ -354,7 +355,7 @@ const textAddon = (position: 'left' | 'right') => css`
   align-items: center;
   background: ${palette.grey[100]};
   border: 1px solid ${palette.grey[300]};
-  border-left: none;
+  border-${position === 'right' ? 'left' : 'right'}: none;
   font-size: 1em;
   border-top-${position}-radius: 0.25rem;
   border-bottom-${position}-radius: 0.25rem;
