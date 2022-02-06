@@ -96,8 +96,60 @@ export function Disabled() {
   )
 }
 
+export function Size() {
+  const [value, setValue] = useState('')
+  const options = [
+    {
+      value: 'Option 1',
+    },
+    {
+      value: 'Option 2',
+    },
+    {
+      value: 'Option 3',
+    },
+  ]
+
+  return (
+    <div css={wrapper}>
+      <Select
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        size="xs"
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        size="sm"
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        size="md"
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        size="lg"
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        size="xl"
+      />
+    </div>
+  )
+}
+
 const wrapper = css`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
   flex-wrap: wrap;
   & + & {
