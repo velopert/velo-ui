@@ -34,7 +34,7 @@ const iconViewer = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 3.5rem;
+  min-width: 3.5rem;
   height: 3.5rem;
   svg {
     width: 1.5rem;

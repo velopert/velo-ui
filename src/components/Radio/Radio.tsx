@@ -24,10 +24,12 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
    * Customize actve, focus, hover color
    */
   color?: string
+  // @todo: disabled
 }
 
 /**
  * `Radio` is used to select one of the item in a group.
+ * When you have more than 5 options, you should use `Select` instead.
  *
  *
  * If you wrap multiple `Radio` with `Radio.Group` component, you do not have to set `checked` and `onChange` manually.
