@@ -1,9 +1,8 @@
 import { css } from '@emotion/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { palette } from '../../lib/palette'
+import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
-
-type SelectSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 interface Props {
   /**
@@ -15,7 +14,7 @@ interface Props {
   value: string
   onChange?(e: React.ChangeEvent<HTMLSelectElement>): void
   disabled?: boolean
-  size?: SelectSize
+  size?: Size
   /**
    * Placeholder is shown when the value is empty (`''`)
    */
@@ -90,7 +89,7 @@ const sizes = {
 }
 
 const base = (
-  size: SelectSize,
+  size: Size,
   disabled: boolean | undefined,
   focused: boolean
 ) => css`
@@ -105,8 +104,8 @@ const base = (
   border-radius: 0.25rem;
   background: white;
   align-items: center;
-  font-size: ${sizes[size]};
-  height: 2.5em;
+  font-size: ${sizeSets[size].fontSize};
+  height: ${sizeSets[size].height};
   svg {
     position: absolute;
     right: 0;
@@ -152,8 +151,8 @@ const selectStyle = css`
   height: 100%;
   font-size: 1em;
   border: none;
-  padding-left: 0.75em;
-  padding-right: 2.25em;
+  padding-left: 1em;
+  padding-right: 2.5em;
 
   -webkit-appearance: none;
   -moz-appearance: none;

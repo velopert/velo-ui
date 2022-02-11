@@ -2,16 +2,15 @@ import { css } from '@emotion/react'
 import { useMemo } from 'react'
 import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { palette } from '../../lib/palette'
+import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
-
-type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /**
    * Default size of the input is `md`
    */
-  size?: InputSize
+  size?: Size
   /**
    * Color of the border and text when input is foucused.
    * You can also override this color from VeloProvider.
@@ -156,7 +155,7 @@ function Input({
         {leftAddonEl}
         <div
           css={[
-            inputBox(disabled),
+            inputBox(size, disabled),
             focused && focusedStyle(focusedColor),
             isError && errorStyle,
             rightAddon && noBorderRadius('right'),
@@ -214,22 +213,14 @@ function Input({
   )
 }
 
-const sizes = {
-  xs: '0.75rem',
-  sm: '0.875rem',
-  md: '1rem',
-  lg: '1.125rem',
-  xl: '1.3125rem',
-}
-
-const wrapper = (size: InputSize, isFullWidth?: boolean) => css`
+const wrapper = (size: Size, isFullWidth?: boolean) => css`
   display: inline-flex;
   flex-direction: column;
   ${isFullWidth &&
   css`
     width: 100%;
   `}
-  font-size: ${sizes[size]};
+  font-size: ${sizeSets[size].fontSize};
 `
 
 const labelStyle = css`
@@ -240,7 +231,7 @@ const labelStyle = css`
   transition: 0.125s all ease-in;
 `
 
-const inputBox = (disabled?: boolean) => css`
+const inputBox = (size: Size, disabled?: boolean) => css`
   width: 100%;
   border: 1px solid ${palette.grey[300]};
 
@@ -252,7 +243,7 @@ const inputBox = (disabled?: boolean) => css`
   padding-left: 0.75em;
   padding-right: 0.75em;
   align-items: center;
-  height: 2.5rem;
+  height: ${sizeSets[size].height};
   cursor: text;
 
   ${disabled &&

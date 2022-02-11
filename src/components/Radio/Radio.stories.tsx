@@ -107,11 +107,8 @@ export function Color() {
 
 const wrapper = css`
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   flex-direction: column;
-  & + & {
-    margin-top: 0.5rem;
-  }
   margin-bottom: 1rem;
 `

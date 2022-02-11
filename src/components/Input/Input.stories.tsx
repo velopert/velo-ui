@@ -23,11 +23,9 @@ Basic.args = {
 export const Size: InputStory = () => {
   return (
     <div css={wrapper}>
-      <Input size="xs" placeholder="X-Small" />
       <Input size="sm" placeholder="Small" />
       <Input size="md" placeholder="Medium" />
       <Input size="lg" placeholder="Large" />
-      <Input size="xl" placeholder="X-Large" />
     </div>
   )
 }
@@ -73,7 +71,7 @@ export const Error: InputStory = () => {
 export const WithLabel: InputStory = () => {
   return (
     <div css={wrapper}>
-      <Input label="Email" placeholder="velo.ui@gmail.com" size="xs" />
+      <Input label="Email" placeholder="velo.ui@gmail.com" size="sm" />
       <Input label="Email" placeholder="velo.ui@gmail.com" />
       <Input label="Email" placeholder="velo.ui@gmail.com" size="lg" />
       <Input
@@ -100,12 +98,6 @@ export const WithIcon: InputStory = () => {
         icon={<Icon name="search" />}
         size="lg"
       />
-      <Input
-        placeholder="Search something..."
-        icon={<Icon name="search" />}
-        iconPosition="right"
-        size="xl"
-      />
     </div>
   )
 }
@@ -113,6 +105,7 @@ export const WithIcon: InputStory = () => {
 export const Password: InputStory = () => {
   return (
     <div css={wrapper}>
+      <Input type="password" size="sm" />
       <Input type="password" />
       <Input type="password" size="lg" />
       <Input type="password" disablePlainPassword />

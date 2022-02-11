@@ -29,11 +29,9 @@ Basic.argTypes = {
 export function Size() {
   return (
     <div css={wrapper}>
-      <Button size="xs">X-Small</Button>
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
-      <Button size="xl">X-Large</Button>
     </div>
   )
 }

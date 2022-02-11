@@ -2,10 +2,10 @@ import { css } from '@emotion/react'
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 import { palette } from '../../lib/palette'
 import { rgba } from 'polished'
+import { Size, sizeSets } from '../../lib/sizes'
 
 type ButtonType = 'primary' | 'secondary' | 'destructive'
 type ButtonVariant = 'default' | 'outline' | 'ghost'
-type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface ButtonColorScheme {
   background: string
@@ -44,7 +44,7 @@ interface ButtonProps
   /**
    * Default size of the button is `md`
    */
-  size?: ButtonSize
+  size?: Size
   /**
    * Set this to `true` when you want to make your button full width of its parent
    */
@@ -221,19 +221,11 @@ const ghostStyle = (scheme: ButtonColorScheme) => css`
   }
 `
 
-const sizes = {
-  xs: '0.75rem',
-  sm: '0.875rem',
-  md: '1rem',
-  lg: '1.125rem',
-  xl: '1.3125rem',
-}
-
 const fullWidthStyle = css`
   width: 100%;
 `
 
-const buttonStyle = (size: ButtonSize, isSquare?: boolean) => css`
+const buttonStyle = (size: Size, isSquare?: boolean) => css`
   border: none;
   outline: none;
   display: inline-flex;
@@ -242,10 +234,10 @@ const buttonStyle = (size: ButtonSize, isSquare?: boolean) => css`
 
   border-radius: 0.25rem;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  font-size: ${sizes[size]};
-  height: 2.5em;
+  font-size: ${sizeSets[size].fontSize};
+  height: ${sizeSets[size].height};
   padding-left: 1em;
   padding-right: 1em;
 

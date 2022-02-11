@@ -116,12 +116,6 @@ export function Size() {
         options={options}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        size="xs"
-      />
-      <Select
-        options={options}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
         size="sm"
       />
       <Select
@@ -135,12 +129,6 @@ export function Size() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         size="lg"
-      />
-      <Select
-        options={options}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        size="xl"
       />
     </div>
   )
