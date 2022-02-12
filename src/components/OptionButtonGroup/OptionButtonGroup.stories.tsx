@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import OptionButton from '../OptionButton/OptionButton'
 import OptionButtonGroup from './OptionButtonGroup'
 
@@ -13,8 +13,14 @@ export default {
 const Template: ComponentStory<typeof OptionButtonGroup> = (args) => {
   const [value, setValue] = useState(1)
 
+  useEffect(() => {
+    if (args.value) {
+      setValue(args.value as any)
+    }
+  }, [args.value])
+
   return (
-    <OptionButtonGroup value={value} onChangeValue={setValue}>
+    <OptionButtonGroup {...args} value={value} onChangeValue={setValue}>
       <OptionButton value={1}>Option 1</OptionButton>
       <OptionButton value={2}>Option 2</OptionButton>
       <OptionButton value={3}>Option 3</OptionButton>
@@ -24,7 +30,9 @@ const Template: ComponentStory<typeof OptionButtonGroup> = (args) => {
 
 export const Basic = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Basic.args = {}
+Basic.args = {
+  value: 1,
+}
 
 Basic.argTypes = {}
 
