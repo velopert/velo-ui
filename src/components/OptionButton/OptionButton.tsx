@@ -6,11 +6,23 @@ import { rgba } from 'polished'
 
 interface Props<T> {
   checked?: boolean
+  /**
+   * Default size is `md`
+   */
   size?: Size
   children?: ReactNode
+  /**
+   * When the component is pressed, it will call this function with the `value` of the component.
+   */
   onChangeValue?(value?: T): void
   value?: T
   fillOnChecked?: boolean
+  /**
+   * Set this props if you do not want margin between each component. By setting this prop, you can remove border radius and right/left border so that the borders are not duplicated.
+   *
+   * Set the leftmost component to `left`, set the rightmost component to `right`, and set the middle components to `middle`.
+   * If you do not want to set this manually, you can use `OptionButtonGroup`
+   */
   borderOption?: 'default' | 'left' | 'middle' | 'right'
   disabled?: boolean
   /**
@@ -21,6 +33,7 @@ interface Props<T> {
 
 /**
  * `OptionButton` is used to select one of the item in a group. It is similar to `Radio` but it appears as a button.
+ * You can use this component more easily if you use it with `OptionButtonGroup`.
  * @returns
  */
 function OptionButton<T>({
