@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
+import LabelGroup from '../LabelGroup/LabelGroup'
 import OptionButton from '../OptionButton/OptionButton'
 import OptionButtonGroup from './OptionButtonGroup'
 
@@ -93,6 +94,27 @@ export function Size() {
         <OptionButton value={3}>Option 3</OptionButton>
       </OptionButtonGroup>
     </div>
+  )
+}
+
+export function WithLabel() {
+  const [value, setValue] = useState(1)
+
+  return (
+    <LabelGroup name="Options">
+      {({ onFocus, onBlur }) => (
+        <OptionButtonGroup
+          value={value}
+          onChangeValue={setValue}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        >
+          <OptionButton value={1}>Option 1</OptionButton>
+          <OptionButton value={2}>Option 2</OptionButton>
+          <OptionButton value={3}>Option 3</OptionButton>
+        </OptionButtonGroup>
+      )}
+    </LabelGroup>
   )
 }
 

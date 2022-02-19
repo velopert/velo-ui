@@ -1,9 +1,8 @@
 import { jsx } from '@emotion/core'
 import { css } from '@emotion/react'
 import React, { useMemo } from 'react'
-import { addSyntheticLeadingComment } from 'typescript'
 
-interface Props {
+export interface TextProps {
   as?:
     | 'h1'
     | 'h2'
@@ -26,6 +25,9 @@ interface Props {
   clamp?: number
 }
 
+/**
+ * `Text` is used to display text. Use this component to unify the typorgaphic styles within your web app.
+ */
 function Text({
   as = 'div',
   whiteSpace,
@@ -36,7 +38,7 @@ function Text({
   className,
   truncate,
   clamp,
-}: Props) {
+}: TextProps) {
   const fontSize = useMemo(() => `${size / 16}rem`, [size])
 
   return jsx(

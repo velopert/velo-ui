@@ -4,7 +4,8 @@ import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
 
-interface Props {
+interface Props
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   /**
    * List of options to show in the select
    * By default, the `value` is shown as the option's name.
@@ -28,6 +29,8 @@ function Select({
   placeholder,
   onChange,
   disabled,
+  onFocus,
+  onBlur,
 }: Props) {
   const selectRef = useRef<HTMLSelectElement>(null)
   const [isPlaceholder, setIsPlaceholder] = useState(false)
@@ -57,11 +60,13 @@ function Select({
         }}
         value={value}
         disabled={disabled}
-        onFocus={() => {
+        onFocus={(e) => {
           setFocused(true)
+          onFocus?.(e)
         }}
-        onBlur={() => {
+        onBlur={(e) => {
           setFocused(false)
+          onBlur?.(e)
         }}
       >
         {placeholder && (

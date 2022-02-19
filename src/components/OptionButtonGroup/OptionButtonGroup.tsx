@@ -23,6 +23,9 @@ interface Props<T> extends OptionButtonGroupContextValue<T> {
    */
   gap?: string | number
   fillOnChecked?: boolean
+  tabIndex?: number
+  onFocus?: (e: React.FocusEvent<HTMLDivElement>) => void
+  onBlur?: (e: React.FocusEvent<HTMLDivElement>) => void
 }
 
 /**
@@ -37,6 +40,9 @@ function OptionButtonGroup<T>({
   disabled,
   size,
   fillOnChecked,
+  tabIndex = 0,
+  onFocus,
+  onBlur,
 }: Props<T>) {
   /**
    * Since we have to use React.Children.map in order to override borderOption
@@ -76,7 +82,16 @@ function OptionButtonGroup<T>({
       }),
     [children, isSticked, value, onChangeValue, disabled, size, fillOnChecked]
   )
-  return <div css={wrapper(isSticked ? 0 : gap)}>{enhancedChildren}</div>
+  return (
+    <div
+      css={wrapper(isSticked ? 0 : gap)}
+      tabIndex={tabIndex}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
+      {enhancedChildren}
+    </div>
+  )
 }
 
 const wrapper = (gap: string | number) => css`

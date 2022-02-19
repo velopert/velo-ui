@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
+import LabelGroup from '../LabelGroup/LabelGroup'
 import Select from './Select'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -131,6 +132,35 @@ export function Size() {
         size="lg"
       />
     </div>
+  )
+}
+
+export function WithLabel() {
+  const [value, setValue] = useState('')
+
+  return (
+    <LabelGroup name="Select option">
+      {({ focused, onBlur, onFocus, setFocusd }) => (
+        <Select
+          placeholder="Select an option"
+          options={[
+            {
+              value: 'Option 1',
+            },
+            {
+              value: 'Option 2',
+            },
+            {
+              value: 'Option 3',
+            },
+          ]}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+      )}
+    </LabelGroup>
   )
 }
 

@@ -4,6 +4,7 @@ import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
+import Label from '../Label/Label'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -62,6 +63,12 @@ interface InputProps
   iconPosition?: 'left' | 'right'
 }
 
+const labelSizeMap = {
+  sm: 12,
+  md: 14,
+  lg: 16,
+} as const
+
 function Input({
   size = 'md',
   focusedColor = palette.teal[500],
@@ -78,6 +85,8 @@ function Input({
   className,
   rightAddon,
   leftAddon,
+  onFocus,
+  onBlur,
   ...rest
 }: InputProps) {
   const [focused, setFocused] = useState(false)
@@ -134,22 +143,15 @@ function Input({
       }}
       className={className}
     >
-      {label !== undefined && (
-        <label
-          css={[
-            labelStyle,
-            focused &&
-              css({
-                color: focusedColor,
-              }),
-            isError &&
-              css({
-                color: palette.red[500],
-              }),
-          ]}
+      {label && (
+        <Label
+          focused={focused}
+          focusedColor={focusedColor}
+          isError={isError}
+          size={labelSizeMap[size]}
         >
           {label}
-        </label>
+        </Label>
       )}
       <div css={wrapperForAddons}>
         {leftAddonEl}
@@ -168,11 +170,11 @@ function Input({
           <input
             css={inputStyle}
             onFocus={(e) => {
-              rest.onFocus?.(e)
+              onFocus?.(e)
               setFocused(true)
             }}
             onBlur={(e) => {
-              rest.onBlur?.(e)
+              onBlur?.(e)
               setFocused(false)
             }}
             onMouseUp={(e) => {
@@ -221,14 +223,6 @@ const wrapper = (size: Size, isFullWidth?: boolean) => css`
     width: 100%;
   `}
   font-size: ${sizeSets[size].fontSize};
-`
-
-const labelStyle = css`
-  font-size: 0.75em;
-  font-weight: 500;
-  color: ${palette.grey[600]};
-  margin-bottom: 0.5em;
-  transition: 0.125s all ease-in;
 `
 
 const inputBox = (size: Size, disabled?: boolean) => css`
