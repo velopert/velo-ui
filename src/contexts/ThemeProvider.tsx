@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
+import { shade } from 'polished'
 
 interface Props {
   children: React.ReactNode
@@ -115,17 +116,17 @@ const lightTheme = css`
   --foreground: #121212;
 
   --primary: #009688;
-  --primary-hover: #00897b;
-  --primary-active: #00796b;
+  --primary-hover: ${shade(0.1, '#009688')};
+  --primary-active: ${shade(0.2, '#009688')};
   --secondary: #e0f2f1;
-  --secondary-hover: #d1ebea;
-  --secondary-active: #bedfde;
+  --secondary-hover: ${shade(0.1, '#e0f2f1')};
+  --secondary-active: ${shade(0.2, '#e0f2f1')};
   --element-text: #ffffff;
   --secondary-element-text: #009688;
 
   --destructive: #f44336;
-  --destructive-hover: #e53935;
-  --destructive-active: #d32f2f;
+  --destructive-hover: ${shade(0.1, '#f44336')};
+  --destructive-active: ${shade(0.2, '#f44336')};
 `
 
 const darkTheme = css`
@@ -144,18 +145,18 @@ const darkTheme = css`
   --foreground: #ffffff;
 
   --primary: #73e6db;
-  --primary-hover: #62d3c8;
-  --primary-active: #55c9bd;
+  --primary-hover: ${shade(0.1, '#73e6db')};
+  --primary-active: ${shade(0.2, '#73e6db')};
   --secondary: #003c36;
-  --secondary-hover: #00302b;
-  --secondary-active: #002a26;
+  --secondary-hover: ${shade(0.1, '#003c36')};
+  --secondary-active: ${shade(0.2, '#003c36')};
 
   --element-text: #121212;
   --secondary-element-text: #74d6cd;
 
   --destructive: #e38193;
-  --destructive-hover: #d17082;
-  --destructive-active: #c45f71;
+  --destructive-hover: ${shade(0.1, '#e38193')};
+  --destructive-active: ${shade(0.2, '#e38193')};
 `
 
 const styles = css`

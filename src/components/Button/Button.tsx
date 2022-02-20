@@ -277,9 +277,9 @@ const buttonStyle = (size: Size, isSquare?: boolean) => css`
   padding-right: 1em;
 
   &:disabled {
-    filter: grayscale(25%);
+    filter: grayscale(15%);
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: 0.6;
   }
 
   &:focus-visible {
