@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
+import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import Text, { TextProps } from '../Text/Text'
 
@@ -20,7 +21,7 @@ interface Props {
  */
 function Label({
   focused,
-  focusedColor = palette.teal[500],
+  focusedColor = cssVar('primary'),
   isError,
   className,
   size = 14,
@@ -44,13 +45,13 @@ function Label({
 }
 
 const labelStyle = css`
-  color: ${palette.grey[600]};
+  color: ${cssVar('accent-7')};
   transition: 0.125s all ease-in;
   margin-bottom: 0.5em !important;
 `
 
 const errorStyle = css`
-  color: ${palette.red[500]};
+  color: ${cssVar('destructive')};
 `
 
 export default Label

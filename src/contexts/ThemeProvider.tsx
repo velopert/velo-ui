@@ -117,16 +117,16 @@ const lightTheme = css`
 
   --primary: #009688;
   --primary-hover: ${shade(0.1, '#009688')};
-  --primary-active: ${shade(0.2, '#009688')};
+  --primary-active: ${shade(0.15, '#009688')};
   --secondary: #e0f2f1;
   --secondary-hover: ${shade(0.1, '#e0f2f1')};
-  --secondary-active: ${shade(0.2, '#e0f2f1')};
+  --secondary-active: ${shade(0.15, '#e0f2f1')};
   --element-text: #ffffff;
   --secondary-element-text: #009688;
 
   --destructive: #f44336;
   --destructive-hover: ${shade(0.1, '#f44336')};
-  --destructive-active: ${shade(0.2, '#f44336')};
+  --destructive-active: ${shade(0.15, '#f44336')};
 `
 
 const darkTheme = css`
@@ -136,7 +136,7 @@ const darkTheme = css`
   --accent-1: #252525;
   --accent-2: #2e2e2e;
   --accent-3: #3d3d3d;
-  --accent-4: #4d4d4d;
+  --accent-4: #5b5b5b;
   --accent-5: #848484;
   --accent-6: #979797;
   --accent-7: #b3b3b3;
@@ -146,17 +146,17 @@ const darkTheme = css`
 
   --primary: #73e6db;
   --primary-hover: ${shade(0.1, '#73e6db')};
-  --primary-active: ${shade(0.2, '#73e6db')};
+  --primary-active: ${shade(0.15, '#73e6db')};
   --secondary: #003c36;
   --secondary-hover: ${shade(0.1, '#003c36')};
-  --secondary-active: ${shade(0.2, '#003c36')};
+  --secondary-active: ${shade(0.15, '#003c36')};
 
   --element-text: #121212;
   --secondary-element-text: #74d6cd;
 
   --destructive: #e38193;
   --destructive-hover: ${shade(0.1, '#e38193')};
-  --destructive-active: ${shade(0.2, '#e38193')};
+  --destructive-active: ${shade(0.15, '#e38193')};
 `
 
 const styles = css`

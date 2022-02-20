@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { useMemo } from 'react'
 import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
+import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
@@ -71,7 +72,7 @@ const labelSizeMap = {
 
 function Input({
   size = 'md',
-  focusedColor = palette.teal[500],
+  focusedColor = cssVar('primary'),
   isFullWidth,
   disabled,
   isError,
@@ -227,13 +228,13 @@ const wrapper = (size: Size, isFullWidth?: boolean) => css`
 
 const inputBox = (size: Size, disabled?: boolean) => css`
   width: 100%;
-  border: 1px solid ${palette.grey[300]};
+  border: 1px solid ${cssVar('accent-4')};
 
   transition: 0.125s all ease-in;
   ${palette.grey[800]};
   display: inline-flex;
   border-radius: 0.25rem;
-  background: white;
+  background: ${cssVar('accent-0')};
   padding-left: 0.75em;
   padding-right: 0.75em;
   align-items: center;
@@ -242,11 +243,14 @@ const inputBox = (size: Size, disabled?: boolean) => css`
 
   ${disabled &&
   css`
-    background: ${palette.grey[100]};
-    color: ${palette.grey[400]};
+    background: ${cssVar('accent-2')};
+    color: ${cssVar('accent-5')};
     cursor: not-allowed;
     input {
       cursor: not-allowed;
+      &::placeholder {
+        color: ${cssVar('accent-5')};
+      }
     }
   `}
 `
@@ -257,11 +261,12 @@ const noBorderRadius = (position: 'left' | 'right') => css`
 `
 
 const errorStyle = css`
-  border: 1px solid ${palette.red[500]};
-  color: ${palette.red[500]};
+  border: 1px solid ${cssVar('destructive')};
+  color: ${cssVar('destructive')};
   input {
     &::placeholder {
-      color: ${palette.red[100]};
+      color: ${cssVar('destructive')};
+      opacity: 0.5;
     }
   }
 `
@@ -285,14 +290,14 @@ const inputStyle = css`
   font-family: inherit;
 
   &::placeholder {
-    color: ${palette.grey[400]};
+    color: ${cssVar('accent-4')};
   }
 `
 
 const errorMessageStyle = css`
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: ${palette.red[500]};
+  color: ${cssVar('destructive')};
   display: flex;
   align-items: center;
 `
@@ -338,8 +343,8 @@ const textAddon = (position: 'left' | 'right') => css`
   padding-right: 0.75em;
   display: flex;
   align-items: center;
-  background: ${palette.grey[100]};
-  border: 1px solid ${palette.grey[300]};
+  background: ${cssVar('accent-1')};
+  border: 1px solid ${cssVar('accent-3')};
   border-${position === 'right' ? 'left' : 'right'}: none;
   font-size: 1em;
   border-top-${position}-radius: 0.25rem;
