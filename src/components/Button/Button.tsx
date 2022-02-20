@@ -191,10 +191,10 @@ export const schemes: Record<ButtonType, ButtonColorScheme> = {
     text: cssVar('secondary-element-text'),
   },
   destructive: {
-    background: palette.red[500],
-    hover: palette.red[600],
-    active: palette.red[700],
-    text: 'white',
+    background: cssVar('destructive'),
+    hover: cssVar('destructive-hover'),
+    active: cssVar('destructive-active'),
+    text: cssVar('element-text'),
   },
 }
 

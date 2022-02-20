@@ -93,6 +93,9 @@ export type ColorKey =
   | 'secondary-active'
   | 'element-text'
   | 'secondary-element-text'
+  | 'destructive'
+  | 'destructive-hover'
+  | 'destructive-active'
 
 export const cssVar = (key: ColorKey) => `var(--${key})`
 
@@ -119,6 +122,10 @@ const lightTheme = css`
   --secondary-active: #bedfde;
   --element-text: #ffffff;
   --secondary-element-text: #009688;
+
+  --destructive: #f44336;
+  --destructive-hover: #e53935;
+  --destructive-active: #d32f2f;
 `
 
 const darkTheme = css`
@@ -137,14 +144,18 @@ const darkTheme = css`
   --foreground: #ffffff;
 
   --primary: #73e6db;
-  --primary-hover: #64d6cb;
-  --primary-active: #59cabf;
+  --primary-hover: #62d3c8;
+  --primary-active: #55c9bd;
   --secondary: #003c36;
   --secondary-hover: #00302b;
   --secondary-active: #002a26;
 
   --element-text: #121212;
   --secondary-element-text: #74d6cd;
+
+  --destructive: #e38193;
+  --destructive-hover: #d17082;
+  --destructive-active: #c45f71;
 `
 
 const styles = css`
