@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 import { palette } from '../../lib/palette'
-import { rgba } from 'polished'
+import { rgba, darken } from 'polished'
 import { Size, sizeSets } from '../../lib/sizes'
 import { cssVar, useTheme } from '../../contexts/ThemeProvider'
 import { getCSSVarValue } from '../../lib/utils'

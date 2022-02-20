@@ -24,12 +24,19 @@ export const parameters = {
 }
 
 export const decorators = [
-  (Story) => (
-    <ThemeProvider>
-      <StorybookThemeWrapper>
-        <GlobalStyles />
-        <Story />
-      </StorybookThemeWrapper>
-    </ThemeProvider>
-  ),
+  (Story) => {
+    try {
+      const data = JSON.parse(localStorage.getItem('sb-addon-themes-3'))
+      document.body.dataset.theme = data.current
+    } catch (e) {}
+
+    return (
+      <ThemeProvider>
+        <StorybookThemeWrapper>
+          <GlobalStyles />
+          <Story />
+        </StorybookThemeWrapper>
+      </ThemeProvider>
+    )
+  },
 ]
