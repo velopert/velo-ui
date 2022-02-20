@@ -14,23 +14,46 @@ function BrandColors(props: Props) {
         textColor={cssVar('element-text')}
       />
       <ColorItem
+        name="Primary Hover"
+        variableName="primary-hover"
+        textColor={cssVar('element-text')}
+      />
+      <ColorItem
+        name="Primary Active"
+        variableName="primary-active"
+        textColor={cssVar('element-text')}
+      />
+      <ColorItem
         name="Element Text"
         variableName="element-text"
         textColor={cssVar('foreground')}
       />
-      <div css={random}></div>
+      <ColorItem
+        name="Secondary"
+        variableName="secondary"
+        textColor={cssVar('secondary-element-text')}
+      />
+      <ColorItem
+        name="Secondary Hover"
+        variableName="secondary-hover"
+        textColor={cssVar('secondary-element-text')}
+      />
+      <ColorItem
+        name="Secondary Active"
+        variableName="secondary-active"
+        textColor={cssVar('secondary-element-text')}
+      />
+      <ColorItem
+        name="Secondary Element Text"
+        variableName="secondary-element-text"
+        textColor={cssVar('element-text')}
+      />
     </div>
   )
 }
 
 const wrapper = css`
   border: 1px solid var(--accent-4);
-`
-
-const random = css`
-  /* background: ${rgba(pcssVar('--accent-5'), 0.5)}; */
-  width: 45px;
-  height: 45px;
 `
 
 export default BrandColors

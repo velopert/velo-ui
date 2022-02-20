@@ -115,8 +115,8 @@ const lightTheme = css`
   --primary-hover: #00897b;
   --primary-active: #00796b;
   --secondary: #e0f2f1;
-  --secondary-hover: #b2dfdb;
-  --secondary-active: #80cbc4;
+  --secondary-hover: #d1ebea;
+  --secondary-active: #bedfde;
   --element-text: #ffffff;
   --secondary-element-text: #009688;
 `
