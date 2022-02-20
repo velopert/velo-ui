@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { InputHTMLAttributes } from 'react'
+import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import Icon from '../Icon'
 
@@ -28,7 +29,7 @@ function Checkbox({
   checked,
   onToggle,
   size = 'sm',
-  color = palette.teal[500],
+  color = cssVar('primary'),
 }: CheckboxProps) {
   return (
     <label css={wrapper(color, size)} className={className}>
@@ -82,7 +83,7 @@ const box = (checked: boolean, color: string, size: CheckboxSize) => css`
   width: 1.125em;
   height: 1.125em;
   border-radius: 0.25rem;
-  border: 1px solid ${palette.grey[500]};
+  border: 1px solid ${cssVar('accent-6')};
   margin-right: 0.5em;
   position: relative;
   svg {
@@ -99,14 +100,14 @@ const box = (checked: boolean, color: string, size: CheckboxSize) => css`
   css`
     border-color: ${color};
     background: ${color};
-    color: white;
+    color: ${cssVar('element-text')};
   `}
 `
 
 const textStyle = () => css`
   font-size: 1em;
   line-height: 1;
-  color: ${palette.grey[800]};
+  color: ${cssVar('accent-9')};
 `
 
 export default Checkbox
