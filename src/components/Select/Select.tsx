@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useEffect, useRef, useState } from 'react'
+import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
 import Icon from '../Icon'
@@ -107,12 +108,12 @@ const base = (
   align-items: center;
   gap: 0.5em;
 
-  border: 1px solid ${palette.grey[300]};
+  border: 1px solid ${cssVar('accent-4')};
   transition: 0.125s all ease-in;
 
   display: inline-flex;
   border-radius: 0.25rem;
-  background: white;
+  background: ${cssVar('accent-0')};
   align-items: center;
   font-size: ${sizeSets[size].fontSize};
   height: ${sizeSets[size].height};
@@ -123,21 +124,21 @@ const base = (
     height: 1.5em;
     right: 0.25em;
     pointer-events: none;
-    color: ${palette.grey[600]};
+    color: ${cssVar('accent-6')};
   }
 
-  color: ${palette.grey[900]};
+  color: ${cssVar('accent-9')};
 
   ${!disabled &&
   css`
     cursor: pointer;
     &:hover {
-      border: 1px solid ${palette.teal[500]};
+      border: 1px solid ${cssVar('accent-6')};
     }
     ${focused &&
     css`
-      color: ${palette.teal[500]};
-      border: 1px solid ${palette.teal[500]};
+      color: ${cssVar('primary')};
+      border: 1px solid ${cssVar('primary')};
       svg {
         color: inherit;
       }
@@ -147,8 +148,8 @@ const base = (
   ${disabled &&
   css`
     cursor: not-allowed;
-    background: ${palette.grey[50]};
-    color: ${palette.grey[400]};
+    background: ${cssVar('accent-2')};
+    color: ${cssVar('accent-5')};
     svg {
       color: inherit;
     }
@@ -171,7 +172,7 @@ const selectStyle = css`
 `
 
 const placeholderStyle = css`
-  color: ${palette.grey[400]};
+  color: ${cssVar('accent-4')};
 `
 
 export default Select
