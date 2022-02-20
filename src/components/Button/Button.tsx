@@ -10,7 +10,8 @@ import { palette } from '../../lib/palette'
 import { rgba, darken } from 'polished'
 import { Size, sizeSets } from '../../lib/sizes'
 import { cssVar, useTheme } from '../../contexts/ThemeProvider'
-import { getCSSVarValue } from '../../lib/utils'
+import { getCSSVarValue, safelyAlterColor } from '../../lib/utils'
+import { useThemeVariableColor } from '../../hooks/useThemeVariableColor'
 
 type ButtonType = 'primary' | 'secondary' | 'destructive'
 type ButtonVariant = 'default' | 'outline' | 'ghost'
@@ -124,29 +125,19 @@ function Button({
   isSquare,
   ...rest
 }: ButtonProps) {
-  const { theme, isDarkTheme } = useTheme()
+  const { isDarkTheme } = useTheme()
   const scheme =
     variant !== 'default' && type === 'secondary'
       ? secondaryVariantScheme(isDarkTheme)
       : schemes[type]
 
-  const [selectedColor, setSelectedColor] = useState(scheme.background)
-  useEffect(() => {
-    const color = scheme.background
-    setTimeout(() => {
-      const value = getCSSVarValue(color)
-
-      if (value !== '') {
-        setSelectedColor(value)
-      }
-    }, 0)
-  }, [scheme, theme])
+  const themeColor = useThemeVariableColor(scheme.background)
 
   const styles = [
     buttonStyle(size, isSquare),
     variant === 'default' && defaultStyle(scheme),
     variant === 'outline' && outlineStyle(scheme),
-    variant === 'ghost' && ghostStyle(selectedColor, isDarkTheme),
+    variant === 'ghost' && ghostStyle(themeColor, isDarkTheme),
     isFullWidth && fullWidthStyle,
   ]
 
@@ -245,14 +236,14 @@ const ghostStyle = (color: string, isDarkTheme: boolean) => css`
   background: transparent;
   color: ${color};
   &:hover:enabled {
-    background: ${color.includes('--')
-      ? color
-      : rgba(color, isDarkTheme ? 0.3 : 0.1)};
+    background: ${safelyAlterColor(color, (color) =>
+      rgba(color, isDarkTheme ? 0.3 : 0.1)
+    )};
   }
   &:active:enabled {
-    background: ${color.includes('--')
-      ? color
-      : rgba(color, isDarkTheme ? 0.4 : 0.2)};
+    background: ${safelyAlterColor(color, (color) =>
+      rgba(color, isDarkTheme ? 0.4 : 0.2)
+    )};
   }
 `
 

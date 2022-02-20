@@ -3,6 +3,9 @@ import { InputHTMLAttributes, useState } from 'react'
 import { palette } from '../../lib/palette'
 import { rgba } from 'polished'
 import { useRadioGroup } from '../RadioGroup/RadioGroup'
+import { cssVar } from '../../contexts/ThemeProvider'
+import { useThemeVariableColor } from '../../hooks/useThemeVariableColor'
+import { safelyAlterColor } from '../../lib/utils'
 
 type RadioSize = 'sm' | 'md' | 'lg'
 
@@ -39,12 +42,13 @@ function Radio({
   size = 'sm',
   checked,
   onChange,
-  color = palette.teal[500],
+  color = cssVar('primary'),
   ...rest
 }: Props) {
   const [focused, setFocused] = useState(false)
   const { value, onChangeValue } = useRadioGroup()
   const isChecked = checked || value === rest.value
+  const themeColor = useThemeVariableColor(color)
 
   return (
     <label css={wrapper(size, color)}>
@@ -63,7 +67,7 @@ function Radio({
           setFocused(false)
         }}
       />
-      <span css={circle(!!isChecked, focused, color)}>
+      <span css={circle(!!isChecked, focused, themeColor)}>
         <span css={smallDot(isChecked)}></span>
       </span>
       <span>{children}</span>
@@ -82,7 +86,7 @@ const wrapper = (size: RadioSize, color: string) => css`
   font-size: ${sizes[size]};
   display: flex;
   align-items: center;
-  color: ${palette.grey[800]};
+  color: ${cssVar('accent-9')};
   cursor: pointer;
   input {
     position: absolute;
@@ -107,7 +111,7 @@ const circle = (checked: boolean, focused: boolean, color: string) => css`
   width: 1.125em;
   height: 1.125em;
   border-radius: 50%;
-  border: 1px solid ${palette.grey[500]};
+  border: 1px solid ${cssVar('accent-5')};
   display: block;
   margin-right: 0.5em;
   transition: 0.125s all ease-in;
@@ -122,12 +126,13 @@ const circle = (checked: boolean, focused: boolean, color: string) => css`
 
   ${focused &&
   css`
-    box-shadow: 0 0 0 0.25em ${rgba(color, 0.4)};
+    box-shadow: 0 0 0 0.25em
+      ${safelyAlterColor(color, (color) => rgba(color, 0.4))};
   `}
 `
 
 const smallDot = (checked?: boolean) => css`
-  background: white;
+  background: ${cssVar('element-text')};
   width: 0.5em;
   height: 0.5em;
   border-radius: 50%;

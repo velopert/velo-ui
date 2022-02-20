@@ -3,6 +3,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
 } from 'react'
@@ -11,6 +12,9 @@ import { shade } from 'polished'
 interface Props {
   children: React.ReactNode
 }
+
+const useIsomorphicEffect =
+  typeof window !== 'undefined' ? useEffect : useLayoutEffect
 
 type Theme = 'light' | 'dark' | 'default'
 const ThemeContext =
@@ -31,7 +35,7 @@ export function ThemeProvider({ children }: Props) {
   const [theme, setTheme] = useState<'light' | 'dark' | 'default'>('default')
   const [systemIsDark, setSystemIsDark] = useState(() => checkIsDarkTheme())
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     if (theme === 'default') return
     document.body.dataset.theme = theme
   }, [theme])

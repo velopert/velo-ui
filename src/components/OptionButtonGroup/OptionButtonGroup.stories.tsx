@@ -45,6 +45,7 @@ export function Sticked() {
       <OptionButton value={1}>Option 1</OptionButton>
       <OptionButton value={2}>Option 2</OptionButton>
       <OptionButton value={3}>Option 3</OptionButton>
+      <OptionButton value={4}>Option 3</OptionButton>
     </OptionButtonGroup>
   )
 }

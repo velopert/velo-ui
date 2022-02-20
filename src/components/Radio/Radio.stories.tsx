@@ -42,7 +42,6 @@ export const Basic = Template.bind({})
 Basic.args = {
   children: 'Option 1',
   checked: false,
-  color: palette.teal[500],
 }
 
 Basic.argTypes = {}

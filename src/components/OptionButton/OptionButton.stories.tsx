@@ -149,9 +149,17 @@ export function BorderOption() {
         value={3}
         checked={value === 3}
         onChangeValue={setValue}
-        borderOption="right"
+        borderOption="middle"
       >
         Option 3
+      </OptionButton>
+      <OptionButton
+        value={4}
+        checked={value === 4}
+        onChangeValue={setValue}
+        borderOption="right"
+      >
+        Option 4
       </OptionButton>
     </div>
   )
@@ -184,10 +192,19 @@ export function BorderOptionFilled() {
         value={3}
         checked={value === 3}
         onChangeValue={setValue}
-        borderOption="right"
+        borderOption="middle"
         fillOnChecked
       >
         Option 3
+      </OptionButton>
+      <OptionButton
+        value={4}
+        checked={value === 4}
+        onChangeValue={setValue}
+        borderOption="right"
+        fillOnChecked
+      >
+        Option 4
       </OptionButton>
     </div>
   )

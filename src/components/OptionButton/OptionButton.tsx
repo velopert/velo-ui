@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
 import { rgba } from 'polished'
+import { cssVar } from '../../contexts/ThemeProvider'
 
 interface Props<T> {
   checked?: boolean
@@ -73,42 +74,46 @@ const block = (
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: ${cssVar('accent-0')};
   font-size: ${sizeSets[size].fontSize};
   height: ${sizeSets[size].height};
 
   border: none;
   outline: none;
-  border: 1px solid ${palette.grey[500]};
-  color: ${palette.grey[500]};
+  border: 1px solid ${cssVar('accent-6')};
+  color: ${cssVar('accent-6')};
   border-radius: 0.25rem;
   padding-left: 1em;
   padding-right: 1em;
-  transition: 0.125s color ease-in, 0.125s background ease-in,
-    0.125s border-color ease-in;
+  transition: 0.125s color ease-in, 0.125s background ease-in;
   cursor: pointer;
   font-family: inherit;
   font-weight: 600;
   &:hover:enabled {
-    color: ${palette.teal[500]};
+    color: ${cssVar('accent-9')};
+    border-color: ${cssVar('accent-9')};
+  }
+  &:hover {
+    z-index: 10;
   }
   ${checked &&
   css`
-    color: ${palette.teal[500]};
-    border-color: ${palette.teal[500]};
+    z-index: 5;
+    color: ${cssVar('primary')};
+    border-color: ${cssVar('primary')};
     &:hover:enabled {
-      color: ${rgba(palette.teal[500], 0.8)};
-      border-color: ${rgba(palette.teal[500], 0.8)};
+      color: ${cssVar('primary-hover')};
+      border-color: ${cssVar('primary-hover')};
     }
 
     ${fillOnChecked &&
     css`
-      background: ${palette.teal[500]};
-      color: white;
+      background: ${cssVar('primary')};
+      color: ${cssVar('element-text')};
       &:hover:enabled {
-        color: white;
-        background: ${rgba(palette.teal[500], 0.8)};
-        border-color: ${rgba(palette.teal[500], 0.8)};
+        color: ${cssVar('element-text')};
+        background: ${cssVar('primary-hover')};
+        border-color: ${cssVar('primary-hover')};
       }
     `}
   `}
@@ -116,11 +121,7 @@ const block = (
   ${borderOption !== 'default' &&
   css`
     .option-button + & {
-      border-left: 1px solid ${palette.grey[500]};
-    }
-
-    .checked + & {
-      border-left-width: 0px;
+      margin-left: -1px;
     }
   `}
 
@@ -128,13 +129,10 @@ const block = (
   css`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right-width: 0;
-    ${checked &&
+
+    /* ${checked &&
     css`
-      border-right-width: 1px;
-    `}/* ${checked &&
-    css`
-      box-shadow: 1px 0px 0px 0px ${palette.teal[500]};
+      box-shadow: 1px 0px 0px 0px ${cssVar('primary')};
     `} */
   `}
 
@@ -142,38 +140,22 @@ const block = (
   css`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border-left: none;
+    /* box-shadow: -1px 0px 0px 0px ${cssVar('accent-6')};
     ${checked &&
     css`
-      border-left: 1px solid ${palette.teal[500]} !important;
-      &:hover:enabled {
-        border-color: ${rgba(palette.teal[500], 0.8)} !important;
-      }
-    `}/* box-shadow: -1px 0px 0px 0px ${palette.grey[500]};
-    ${checked &&
-    css`
-      box-shadow: -1px 0px 0px 0px ${palette.teal[500]};
+      box-shadow: -1px 0px 0px 0px ${cssVar('primary')};
     `} */
   `}
 
   ${borderOption === 'middle' &&
   css`
-    border-left-width: 0;
-    border-right-width: 0;
     border-radius: 0;
+    /* box-shadow: -1px 0px 0px 0px ${cssVar('accent-6')},
+      1px 0px 0px 0px ${cssVar('accent-6')};
     ${checked &&
     css`
-      border-left: 1px solid ${palette.teal[500]} !important;
-      border-right-width: 1px;
-      &:hover:enabled {
-        border-color: ${rgba(palette.teal[500], 0.8)} !important;
-      }
-    `}/* box-shadow: -1px 0px 0px 0px ${palette.grey[500]},
-      1px 0px 0px 0px ${palette.grey[500]};
-    ${checked &&
-    css`
-      box-shadow: -1px 0px 0px 0px ${palette.teal[500]},
-        1px 0px 0px 0px ${palette.teal[500]};
+      box-shadow: -1px 0px 0px 0px ${cssVar('primary')},
+        1px 0px 0px 0px ${cssVar('primary')};
     `} */
   `} /* ${checked &&
   css`
