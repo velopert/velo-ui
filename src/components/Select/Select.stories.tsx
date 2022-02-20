@@ -6,7 +6,7 @@ import Select from './Select'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Select',
+  title: 'Components/Select',
   component: Select,
 } as ComponentMeta<typeof Select>
 

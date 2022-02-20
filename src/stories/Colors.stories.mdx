@@ -1,0 +1,73 @@
+import { Global } from '@emotion/react'
+import { Meta } from '@storybook/addon-docs'
+import NeutralColors from './NeutralColors'
+import DocsDarkThemeCompat from './DocsDarkThemeCompat'
+import DocsThemeWrapper from './DocsThemeWrapper'
+
+<Meta title="Colors" />
+
+<style>{`
+  body, html {
+    box-sizing: border-box;
+    
+  }
+  * {
+    box-sizing: inherit;
+  }
+`}</style>
+
+# Colors
+
+Colors used in Velo UI are described in this document.
+
+There are two kinds of palettes provided in this system. The first one is themed palette, which is a palette that supports dark theme. Second one is basic palette, which is a JavaScript object that contains the colors.
+
+To use themed palette, you need to import `cssVar` function from the project, and pass the variable name as the argument.
+
+```js
+import { cssVar } from 'velo-ui'
+
+const styles = css`
+  background: ${cssVar('accent-1')};
+`
+```
+
+To use basic palette, you need to import `palette` object from the project. Color names are the keys of the object. Color level starts from 50 and ends at 900. The unit of the color level is 100 (except the first one).
+
+```js
+import { palette } from 'velo-ui'
+
+const styles = css`
+  background: ${palette.grey[500]};
+`
+```
+
+Just be reminded that dark theme support does not work if you use the color directly from the basic palette.
+
+## Themed Palette
+
+There are three categories of colors in the themed palette.
+
+1. Neutral Colors
+2. Brand Colors
+3. Status Colors
+
+### Neutral Colors
+
+Neutral colors are grayscale colors used for backgrounds, borders, text, and icons. If you use these colors in your project, you can easily support dark theme to your application. If you are not planning to support dark theme, check [palette](#palette) section.
+
+<DocsThemeWrapper>
+  <NeutralColors />
+</DocsThemeWrapper>
+
+`Background Secondary` and `Accent 0` are used to support the situation when you want to show a white element on gray background. (e.g. card ui on [velog](https://velog.io/))
+
+### Brand Colors
+
+### Status Colors
+
+### Adding Extra CSS Variables
+
+## Basic Palette Palette
+
+<DocsDarkThemeCompat />

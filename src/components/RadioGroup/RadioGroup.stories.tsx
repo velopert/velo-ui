@@ -6,7 +6,7 @@ import RadioGroup from './RadioGroup'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'RadioGroup',
+  title: 'Components/RadioGroup',
   component: RadioGroup,
 } as ComponentMeta<typeof RadioGroup>
 

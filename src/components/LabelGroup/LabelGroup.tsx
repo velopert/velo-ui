@@ -10,6 +10,15 @@ interface LabelGroupRenderProps {
   setFocusd: (focused: boolean) => void
 }
 interface Props {
+  /**
+   * `children` can be either ReactNode or Render Props function
+   *
+   *
+   * `LabelGroupRenderProps` consists `focused`, `onFocus`, `onBlur`, `setFocused`.
+   *
+   *
+   * You only need `onFocus` and `onBlur` most of the time.
+   */
   children:
     | React.ReactNode
     | ((props: LabelGroupRenderProps) => React.ReactNode)

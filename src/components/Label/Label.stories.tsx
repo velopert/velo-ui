@@ -4,7 +4,7 @@ import Label from './Label'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Label',
+  title: 'Components/Label',
   component: Label,
 } as ComponentMeta<typeof Label>
 

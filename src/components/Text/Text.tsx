@@ -1,6 +1,7 @@
 import { jsx } from '@emotion/core'
 import { css } from '@emotion/react'
 import React, { useMemo } from 'react'
+import { ColorKey } from '../../contexts/ThemeProvider'
 
 export interface TextProps {
   as?:
@@ -23,6 +24,7 @@ export interface TextProps {
   className?: string
   truncate?: boolean
   clamp?: number
+  color?: ColorKey
 }
 
 /**

@@ -33,6 +33,8 @@ interface Props<T> {
 
 /**
  * `OptionButton` is used to select one of the item in a group. It is similar to `Radio` but it appears as a button.
+ *
+ *
  * You can use this component more easily if you use it with `OptionButtonGroup`.
  * @returns
  */

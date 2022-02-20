@@ -29,7 +29,9 @@ interface Props<T> extends OptionButtonGroupContextValue<T> {
 }
 
 /**
- * If you wrap `OptionButton` with this component, you do not need to set `checked`, `onChangeValue` to every `OptionButton` component. Additionally, you can also set configurations like `fillOnChecked`, `size` or `disabled` globally.
+ * If you wrap `OptionButton` with this component, you do not need to set `checked`, `onChangeValue` to every `OptionButton` component.
+ *
+ * Additionally, you can also set configurations like `fillOnChecked`, `size` or `disabled` globally.
  */
 function OptionButtonGroup<T>({
   children,

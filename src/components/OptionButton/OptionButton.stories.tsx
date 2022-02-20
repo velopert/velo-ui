@@ -7,7 +7,7 @@ import OptionButton from './OptionButton'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'OptionButton',
+  title: 'Components/OptionButton',
   component: OptionButton,
 } as ComponentMeta<typeof OptionButton>
 

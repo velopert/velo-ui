@@ -4,7 +4,7 @@ import Icon from './Icon'
 import * as vectors from './vectors'
 
 export default {
-  title: 'Icon',
+  title: 'Components/Icon',
   component: Icon,
 } as ComponentMeta<typeof Icon>
 

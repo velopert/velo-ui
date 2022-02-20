@@ -6,7 +6,7 @@ import Icon from '../Icon'
 import Input from './Input'
 
 export default {
-  title: 'Input',
+  title: 'Components/Input',
   component: Input,
 } as ComponentMeta<typeof Input>
 

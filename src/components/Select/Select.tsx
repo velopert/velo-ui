@@ -22,6 +22,11 @@ interface Props
   placeholder?: string
 }
 
+/**
+ * `Select` is used to select a value from a list of options.
+ *
+ * If you have less than 4 options, it is better to use `OptionButton` or `Radio`.
+ */
 function Select({
   options,
   size = 'md',
