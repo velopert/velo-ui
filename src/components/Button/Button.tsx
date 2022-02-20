@@ -1,8 +1,16 @@
 import { css } from '@emotion/react'
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { palette } from '../../lib/palette'
 import { rgba } from 'polished'
 import { Size, sizeSets } from '../../lib/sizes'
+import { cssVar, useTheme } from '../../contexts/ThemeProvider'
+import { getCSSVarValue } from '../../lib/utils'
 
 type ButtonType = 'primary' | 'secondary' | 'destructive'
 type ButtonVariant = 'default' | 'outline' | 'ghost'
@@ -116,16 +124,29 @@ function Button({
   isSquare,
   ...rest
 }: ButtonProps) {
+  const { theme, isDarkTheme } = useTheme()
   const scheme =
     variant !== 'default' && type === 'secondary'
-      ? secondaryVariantScheme
+      ? secondaryVariantScheme(isDarkTheme)
       : schemes[type]
+
+  const [selectedColor, setSelectedColor] = useState(scheme.background)
+  useEffect(() => {
+    const color = scheme.background
+    setTimeout(() => {
+      const value = getCSSVarValue(color)
+
+      if (value !== '') {
+        setSelectedColor(value)
+      }
+    }, 0)
+  }, [scheme, theme])
 
   const styles = [
     buttonStyle(size, isSquare),
     variant === 'default' && defaultStyle(scheme),
     variant === 'outline' && outlineStyle(scheme),
-    variant === 'ghost' && ghostStyle(scheme),
+    variant === 'ghost' && ghostStyle(selectedColor, isDarkTheme),
     isFullWidth && fullWidthStyle,
   ]
 
@@ -158,16 +179,16 @@ function Button({
 
 export const schemes: Record<ButtonType, ButtonColorScheme> = {
   primary: {
-    background: palette.teal[500],
-    hover: palette.teal[600],
-    active: palette.teal[700],
-    text: 'white',
+    background: cssVar('primary'),
+    hover: cssVar('primary-hover'),
+    active: cssVar('primary-active'),
+    text: cssVar('element-text'),
   },
   secondary: {
-    background: palette.teal[50],
-    hover: palette.teal[100],
-    active: palette.teal[200],
-    text: palette.teal[500],
+    background: cssVar('secondary'),
+    hover: cssVar('secondary-hover'),
+    active: cssVar('secondary-active'),
+    text: cssVar('secondary-element-text'),
   },
   destructive: {
     background: palette.red[500],
@@ -177,12 +198,22 @@ export const schemes: Record<ButtonType, ButtonColorScheme> = {
   },
 }
 
-const secondaryVariantScheme: ButtonColorScheme = {
-  background: palette.grey[700],
-  hover: palette.grey[800],
-  active: palette.grey[900],
-  text: 'white',
-}
+const secondaryVariantScheme: (isDarkTheme: boolean) => ButtonColorScheme = (
+  isDarkTheme
+) =>
+  isDarkTheme
+    ? {
+        background: cssVar('accent-9'),
+        hover: cssVar('accent-8'),
+        active: cssVar('accent-7'),
+        text: cssVar('element-text'),
+      }
+    : {
+        background: cssVar('accent-8'),
+        hover: cssVar('accent-7'),
+        active: cssVar('accent-6'),
+        text: cssVar('element-text'),
+      }
 
 const defaultStyle = (scheme: ButtonColorScheme) => css`
   background: ${scheme.background};
@@ -196,28 +227,32 @@ const defaultStyle = (scheme: ButtonColorScheme) => css`
 `
 
 const outlineStyle = (scheme: ButtonColorScheme) => css`
-  background: white;
+  background: transparent;
   border: 1px solid ${scheme.background};
   color: ${scheme.background};
   &:hover:enabled {
-    background: ${scheme.hover};
-    color: white;
-    border-color: ${scheme.hover};
+    background: ${scheme.background};
+    color: ${scheme.text};
+    border-color: ${scheme.background};
   }
   &:active:enabled {
-    background: ${scheme.active};
-    border-color: ${scheme.active};
+    background: ${scheme.hover};
+    border-color: ${scheme.hover};
   }
 `
 
-const ghostStyle = (scheme: ButtonColorScheme) => css`
+const ghostStyle = (color: string, isDarkTheme: boolean) => css`
   background: transparent;
-  color: ${scheme.background};
+  color: ${color};
   &:hover:enabled {
-    background: ${rgba(scheme.background, 0.1)};
+    background: ${color.includes('--')
+      ? color
+      : rgba(color, isDarkTheme ? 0.3 : 0.1)};
   }
   &:active:enabled {
-    background: ${rgba(scheme.background, 0.2)};
+    background: ${color.includes('--')
+      ? color
+      : rgba(color, isDarkTheme ? 0.4 : 0.2)};
   }
 `
 

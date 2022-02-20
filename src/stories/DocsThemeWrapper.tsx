@@ -1,26 +1,16 @@
 import { useDarkMode } from 'storybook-dark-mode'
-import React, { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 import ThemeProvider, { useTheme } from '../contexts/ThemeProvider'
+import StorybookThemeWrapper from './StorybookThemeWrapper'
 
 interface Props {
   children: ReactNode
 }
 
-function DocsThemeWrapperImpl({ children }: Props) {
-  const darkTheme = useDarkMode()
-  const { setTheme } = useTheme()
-
-  useEffect(() => {
-    setTheme(darkTheme ? 'dark' : 'light')
-  }, [darkTheme, setTheme])
-
-  return <>{children}</>
-}
-
 function DocsThemeWrapper(props: Props) {
   return (
     <ThemeProvider>
-      <DocsThemeWrapperImpl {...props} />
+      <StorybookThemeWrapper {...props} />
     </ThemeProvider>
   )
 }

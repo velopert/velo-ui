@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import ColorItem from './ColorItem'
-import { useDarkMode } from 'storybook-dark-mode'
 import { cssVar } from '../contexts/ThemeProvider'
 
 interface Props {}

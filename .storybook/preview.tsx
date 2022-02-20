@@ -1,6 +1,7 @@
 import React from 'react'
 import GlobalStyles from '../src/components/GlobalStyles'
 import { ThemeProvider } from '../src/contexts/ThemeProvider'
+import StorybookThemeWrapper from '../src/stories/StorybookThemeWrapper'
 import { themes } from '@storybook/theming'
 
 export const parameters = {
@@ -25,8 +26,10 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider>
-      <GlobalStyles />
-      <Story />
+      <StorybookThemeWrapper>
+        <GlobalStyles />
+        <Story />
+      </StorybookThemeWrapper>
     </ThemeProvider>
   ),
 ]

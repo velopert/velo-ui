@@ -1,5 +1,11 @@
 import { css, Global } from '@emotion/react'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 interface Props {
   children: React.ReactNode
@@ -7,18 +13,50 @@ interface Props {
 
 type Theme = 'light' | 'dark' | 'default'
 const ThemeContext =
-  createContext<{ theme: Theme; setTheme(theme: Theme): void } | null>(null)
+  createContext<{
+    theme: Theme
+    isDarkTheme: boolean
+    setTheme(theme: Theme): void
+  } | null>(null)
 
+function checkIsDarkTheme() {
+  if (typeof window === 'undefined') return false
+  const systemPrefersDark = window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches
+  return systemPrefersDark
+}
 export function ThemeProvider({ children }: Props) {
   const [theme, setTheme] = useState<'light' | 'dark' | 'default'>('default')
+  const [systemIsDark, setSystemIsDark] = useState(() => checkIsDarkTheme())
 
   useEffect(() => {
     if (theme === 'default') return
     document.body.dataset.theme = theme
   }, [theme])
 
+  useEffect(() => {
+    const callback = (e: MediaQueryListEvent) => {
+      setSystemIsDark(e.matches)
+    }
+
+    const match = window.matchMedia('(prefers-color-scheme: dark)')
+
+    match.addEventListener('change', callback)
+
+    return () => {
+      match.removeEventListener('change', callback)
+    }
+  }, [])
+
+  const isDarkTheme = useMemo(() => {
+    if (theme === 'dark') return true
+    if (systemIsDark && theme === 'default') return true
+    return false
+  }, [theme, systemIsDark])
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, isDarkTheme }}>
       {children}
       <Global styles={styles} />
     </ThemeContext.Provider>
@@ -47,6 +85,14 @@ export type ColorKey =
   | 'accent-8'
   | 'accent-9'
   | 'foreground'
+  | 'primary'
+  | 'primary-hover'
+  | 'primary-active'
+  | 'secondary'
+  | 'secondary-hover'
+  | 'secondary-active'
+  | 'element-text'
+  | 'secondary-element-text'
 
 export const cssVar = (key: ColorKey) => `var(--${key})`
 
@@ -64,6 +110,15 @@ const lightTheme = css`
   --accent-8: #424242;
   --accent-9: #212121;
   --foreground: #121212;
+
+  --primary: #009688;
+  --primary-hover: #00897b;
+  --primary-active: #00796b;
+  --secondary: #e0f2f1;
+  --secondary-hover: #b2dfdb;
+  --secondary-active: #80cbc4;
+  --element-text: #ffffff;
+  --secondary-element-text: #009688;
 `
 
 const darkTheme = css`
@@ -80,11 +135,21 @@ const darkTheme = css`
   --accent-8: #bdbdbd;
   --accent-9: #e8eaed;
   --foreground: #ffffff;
+
+  --primary: #73e6db;
+  --primary-hover: #64d6cb;
+  --primary-active: #59cabf;
+  --secondary: #003c36;
+  --secondary-hover: #00302b;
+  --secondary-active: #002a26;
+
+  --element-text: #121212;
+  --secondary-element-text: #74d6cd;
 `
 
 const styles = css`
   body {
-    ${lightTheme}
+    ${lightTheme};
   }
 
   @media (prefers-color-scheme: dark) {

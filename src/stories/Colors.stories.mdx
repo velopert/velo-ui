@@ -1,6 +1,7 @@
 import { Global } from '@emotion/react'
 import { Meta } from '@storybook/addon-docs'
 import NeutralColors from './NeutralColors'
+import BrandColors from './BrandColors'
 import DocsDarkThemeCompat from './DocsDarkThemeCompat'
 import DocsThemeWrapper from './DocsThemeWrapper'
 
@@ -63,6 +64,12 @@ Neutral colors are grayscale colors used for backgrounds, borders, text, and ico
 `Background Secondary` and `Accent 0` are used to support the situation when you want to show a white element on gray background. (e.g. card ui on [velog](https://velog.io/))
 
 ### Brand Colors
+
+Primary colors are used for UI elements that you want to emphasize and embody product characteristics. The default brand color of Velo UI is teal. You can override default brand color with `brandColors` Props in `VeloProvider`.
+
+<DocsThemeWrapper>
+  <BrandColors />
+</DocsThemeWrapper>
 
 ### Status Colors
 
