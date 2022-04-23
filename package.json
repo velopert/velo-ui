@@ -1,8 +1,10 @@
 {
   "name": "velo-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "homepage": "https://velo-ui.pages.dev/",
+  "repository": "https://github.com/velopert/velo-ui/",
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@emotion/babel-preset-css-prop": "^11.2.0",
