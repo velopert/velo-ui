@@ -2,7 +2,7 @@ name: 'Chromatic'
 # the event that will trigger the action
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 # what the action will do
 jobs:
