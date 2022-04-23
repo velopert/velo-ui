@@ -4,8 +4,7 @@ import { InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
-import Icon from '../Icon'
-import Label from '../Label/Label'
+import { Icon, Label } from '../'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {

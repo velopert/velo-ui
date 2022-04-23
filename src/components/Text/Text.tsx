@@ -30,7 +30,7 @@ export interface TextProps {
 /**
  * `Text` is used to display text. Use this component to unify the typorgaphic styles within your web app.
  */
-function Text({
+export function Text({
   as = 'div',
   whiteSpace,
   children,
@@ -81,5 +81,3 @@ const clampStyle = (lines: number) => css`
   -webkit-box-orient: vertical;
   overflow: hidden;
 `
-
-export default Text

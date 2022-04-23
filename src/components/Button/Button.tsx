@@ -1,16 +1,9 @@
 import { css } from '@emotion/react'
-import React, {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import { palette } from '../../lib/palette'
-import { rgba, darken } from 'polished'
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import { rgba } from 'polished'
 import { Size, sizeSets } from '../../lib/sizes'
 import { cssVar, useTheme } from '../../contexts/ThemeProvider'
-import { getCSSVarValue, safelyAlterColor } from '../../lib/utils'
+import { safelyAlterColor } from '../../lib/utils'
 import { useThemeVariableColor } from '../../hooks/useThemeVariableColor'
 
 type ButtonType = 'primary' | 'secondary' | 'destructive'
@@ -111,7 +104,7 @@ interface ButtonProps
  * e.g. `<Button asLink href="/about" />`
  * If you are using react-router, you have to use `useLinkClickHandler` to handle the click event.
  */
-function Button({
+export function Button({
   children,
   type = 'primary',
   variant = 'default',
@@ -319,5 +312,3 @@ const takeFullWidth = css`
 const resetLinkStyle = css`
   text-decoration: none;
 `
-
-export default Button

@@ -5,8 +5,6 @@ interface Props {
   children: React.ReactNode
 }
 
-function VeloProvider({ children }: Props) {
+export function VeloProvider({ children }: Props) {
   return <ThemeProvider>{children}</ThemeProvider>
 }
-
-export default VeloProvider

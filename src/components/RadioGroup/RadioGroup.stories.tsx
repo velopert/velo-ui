@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
-import Radio from '../Radio/Radio'
-import RadioGroup from './RadioGroup'
+import { Radio } from '../Radio/Radio'
+import { RadioGroup } from './RadioGroup'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

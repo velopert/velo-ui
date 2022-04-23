@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
 import { palette } from '../../lib/palette'
-import Button from '../Button'
-import Radio from './Radio'
+import { Button } from '../Button'
+import { Radio } from './Radio'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { palette } from '../../lib/palette'
-import Button from '../Button'
-import Icon from '../Icon'
+import { Button, Icon } from '../'
 import Input from './Input'
 
 export default {
