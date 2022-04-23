@@ -16,6 +16,6 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - run: yarn
-      - run: npm publish
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
