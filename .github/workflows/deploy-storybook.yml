@@ -1,13 +1,11 @@
 name: 'Chromatic'
-# the event that will trigger the action
 on:
   push:
     branches: [main]
 
-# what the action will do
 jobs:
   deploy:
-    # the list of steps that the action will go through
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
