@@ -1,7 +1,6 @@
 {
   "name": "velo-ui",
   "version": "0.1.0",
-  "private": true,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "dependencies": {
@@ -83,5 +82,9 @@
     "rollup": "^2.70.2",
     "rollup-plugin-url": "^3.0.1",
     "webpack": "^5.67.0"
-  }
+  },
+  "files": [
+    "/dist"
+  ],
+  "author": "Minjun Kim <public.velopert@gmail.com>"
 }
