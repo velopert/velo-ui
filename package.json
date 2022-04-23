@@ -1,6 +1,6 @@
 {
   "name": "velo-ui",
-  "version": "0.1.5-alpha.3",
+  "version": "0.1.5-alpha.4",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "homepage": "https://velo-ui.pages.dev/",
