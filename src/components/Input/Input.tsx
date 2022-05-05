@@ -305,6 +305,7 @@ const iconStyle = (position: 'left' | 'right' = 'left') => css`
   svg {
     color: inherit;
     width: 1.25em;
+    display: flex;
     ${position === 'left'
       ? css`
           margin-right: 0.5rem;
