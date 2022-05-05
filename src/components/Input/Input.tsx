@@ -93,6 +93,7 @@ function Input({
   const [plainMode, setPlainMode] = useState(type !== 'password')
   const ref = useRef<HTMLInputElement>(null)
   const cursorPosRef = useRef(0)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (cursorPosRef.current === 0) return
@@ -158,11 +159,12 @@ function Input({
         <div
           css={[
             inputBox(size, disabled),
-            focused && focusedStyle(focusedColor),
+            focusedStyle(focusedColor),
             isError && errorStyle,
             rightAddon && noBorderRadius('right'),
             leftAddon && noBorderRadius('left'),
           ]}
+          ref={wrapperRef}
         >
           {icon && iconPosition === 'left' && (
             <div css={iconStyle(iconPosition)}>{icon}</div>
@@ -203,6 +205,7 @@ function Input({
                 setPlainMode(!plainMode)
                 e.stopPropagation()
               }}
+              tabIndex={0}
             >
               <Icon name={plainMode ? 'eye_off' : 'eye'} />
             </div>
@@ -262,6 +265,11 @@ const noBorderRadius = (position: 'left' | 'right') => css`
 const errorStyle = css`
   border: 1px solid ${cssVar('destructive')};
   color: ${cssVar('destructive')};
+
+  &:focus-within {
+    border: 1px solid ${cssVar('destructive-active')};
+    color: ${cssVar('destructive-active')};
+  }
   input {
     &::placeholder {
       color: ${cssVar('destructive')};
@@ -271,8 +279,10 @@ const errorStyle = css`
 `
 
 const focusedStyle = (color: string) => css`
-  color: ${color};
-  border-color: ${color};
+  &:focus-within {
+    color: ${color};
+    border-color: ${color};
+  }
 `
 
 const inputStyle = css`
