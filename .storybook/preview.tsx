@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalStyles from '../src/components/GlobalStyles'
+import { GlobalStyles } from '../src/components/GlobalStyles'
 import { ThemeProvider } from '../src/contexts/ThemeProvider'
 import StorybookThemeWrapper from '../src/stories/StorybookThemeWrapper'
 import { themes } from '@storybook/theming'
