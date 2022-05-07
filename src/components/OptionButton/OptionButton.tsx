@@ -39,7 +39,7 @@ interface Props<T> {
  * You can use this component more easily if you use it with `OptionButtonGroup`.
  * @returns
  */
-function OptionButton<T>({
+export function OptionButton<T>({
   size = 'md',
   checked,
   children,
@@ -180,5 +180,3 @@ const iconWrapper = css`
   }
   margin-right: 0.75em;
 `
-
-export default OptionButton

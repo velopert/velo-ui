@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
-import LabelGroup from '../LabelGroup/LabelGroup'
-import OptionButton from '../OptionButton/OptionButton'
-import OptionButtonGroup from './OptionButtonGroup'
+import { LabelGroup } from '../LabelGroup/LabelGroup'
+import { OptionButton } from '../OptionButton/OptionButton'
+import { OptionButtonGroup } from './OptionButtonGroup'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

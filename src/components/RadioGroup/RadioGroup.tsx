@@ -25,7 +25,7 @@ interface Props extends RadioGroupContextValue {
  * With `RadioGroup`, you do not have to pass `checked` and `onChange` to every `Radio` components.
  * This component will do it internally with React Context. You just have to set the `value` of the `Radio` component.
  */
-function RadioGroup({
+export function RadioGroup({
   onChangeValue,
   value,
   children,
@@ -54,5 +54,3 @@ const wrapper = (direction: 'row' | 'column', gap: string | number) => css`
   flex-direction: ${direction};
   gap: ${safePx(gap)};
 `
-
-export default RadioGroup

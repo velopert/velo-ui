@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import Button from './Button'
+import { Button } from './Button'
 import { css } from '@emotion/react'
-import Icon from '../Icon'
+import { Icon } from '../Icon'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Input from '../Input/Input'
-import LabelGroup from './LabelGroup'
+import { LabelGroup } from './LabelGroup'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

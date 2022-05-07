@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import { cssVar } from '../../contexts/ThemeProvider'
-import { palette } from '../../lib/palette'
-import Text, { TextProps } from '../Text/Text'
+import { Text, TextProps } from '../Text/Text'
 
 interface Props {
   focused?: boolean
@@ -19,7 +18,7 @@ interface Props {
  *
  * Use `LabelGroup` if you want to implement focus effect without writing extra code.
  */
-function Label({
+export function Label({
   focused,
   focusedColor = cssVar('primary'),
   isError,
@@ -53,5 +52,3 @@ const labelStyle = css`
 const errorStyle = css`
   color: ${cssVar('destructive')};
 `
-
-export default Label

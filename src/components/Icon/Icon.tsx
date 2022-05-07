@@ -16,7 +16,7 @@ interface IconProps extends SVGProps<SVGSVGElement> {
  * You can set `color` to change the color of the icon.
  * Or, you can also use `className` or `style` to set the size or color.
  */
-const Icon = React.forwardRef<SVGSVGElement, IconProps>(
+export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ name, ...rest }, ref) => {
     return React.createElement(vectors[name], {
       ...rest,
@@ -26,5 +26,3 @@ const Icon = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 Icon.displayName = 'Icon'
-
-export default Icon

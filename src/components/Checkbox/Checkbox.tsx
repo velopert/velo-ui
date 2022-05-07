@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
 import { InputHTMLAttributes } from 'react'
 import { cssVar } from '../../contexts/ThemeProvider'
-import { palette } from '../../lib/palette'
-import Icon from '../Icon'
+import { Icon } from '../Icon'
 
 type CheckboxSize = 'sm' | 'md' | 'lg'
 interface CheckboxProps
@@ -24,7 +23,7 @@ interface CheckboxProps
 /**
  * Checkbox is used to display a boolean value.
  */
-function Checkbox({
+export function Checkbox({
   className,
   checked,
   onToggle,
@@ -109,5 +108,3 @@ const textStyle = () => css`
   line-height: 1;
   color: ${cssVar('accent-9')};
 `
-
-export default Checkbox

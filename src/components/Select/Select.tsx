@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { cssVar } from '../../contexts/ThemeProvider'
 import { palette } from '../../lib/palette'
 import { Size, sizeSets } from '../../lib/sizes'
-import Icon from '../Icon'
+import { Icon } from '../Icon'
 
 interface Props
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
@@ -28,7 +28,7 @@ interface Props
  *
  * If you have less than 4 options, it is better to use `OptionButton` or `Radio`.
  */
-function Select({
+export function Select({
   options,
   size = 'md',
   value,
@@ -174,5 +174,3 @@ const selectStyle = css`
 const placeholderStyle = css`
   color: ${cssVar('accent-4')};
 `
-
-export default Select

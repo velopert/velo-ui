@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Icon from './Icon'
+import { Icon } from './Icon'
 import * as vectors from './vectors'
 
 export default {

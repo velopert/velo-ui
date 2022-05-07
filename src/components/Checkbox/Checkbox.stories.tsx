@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { useEffect, useState } from 'react'
-import Checkbox from './Checkbox'
+import { Checkbox } from './Checkbox'
 
 export default {
   title: 'Components/Checkbox',

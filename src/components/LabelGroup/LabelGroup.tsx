@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
-import Label from '../Label'
+import { Label } from '../Label'
 import { TextProps } from '../Text/Text'
 
 interface LabelGroupRenderProps {
@@ -45,7 +45,7 @@ interface Props {
  *
  * It provides `focused`, `onFocus`, `onBlur`, `setFocused` properties via render props pattern.
  */
-function LabelGroup({
+export function LabelGroup({
   children,
   className,
   size,
@@ -76,5 +76,3 @@ const sectionStyle = css`
   flex-direction: column;
   align-items: flex-start;
 `
-
-export default LabelGroup

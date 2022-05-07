@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { JSXElementConstructor, ReactElement, useMemo } from 'react'
 import { Size } from '../../lib/sizes'
 import { safePx } from '../../lib/utils'
-import OptionButton from '../OptionButton/OptionButton'
+import { OptionButton } from '../OptionButton/OptionButton'
 
 interface OptionButtonGroupContextValue<T> {}
 
@@ -33,7 +33,7 @@ interface Props<T> extends OptionButtonGroupContextValue<T> {
  *
  * Additionally, you can also set configurations like `fillOnChecked`, `size` or `disabled` globally.
  */
-function OptionButtonGroup<T>({
+export function OptionButtonGroup<T>({
   children,
   gap = '0.5rem',
   isSticked,
@@ -100,5 +100,3 @@ const wrapper = (gap: string | number) => css`
   display: flex;
   gap: ${safePx(gap)};
 `
-
-export default OptionButtonGroup

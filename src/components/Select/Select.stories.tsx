@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { useEffect, useState } from 'react'
-import LabelGroup from '../LabelGroup/LabelGroup'
-import Select from './Select'
+import { LabelGroup } from '../LabelGroup/LabelGroup'
+import { Select } from './Select'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

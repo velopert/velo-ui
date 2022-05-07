@@ -37,7 +37,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
  *
  * If you wrap multiple `Radio` with `Radio.Group` component, you do not have to set `checked` and `onChange` manually.
  */
-function Radio({
+export function Radio({
   children,
   size = 'sm',
   checked,
@@ -143,5 +143,3 @@ const smallDot = (checked?: boolean) => css`
     transform: scale(1);
   `}
 `
-
-export default Radio
