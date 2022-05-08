@@ -16,4 +16,13 @@ const styles = css`
   * {
     box-sizing: inherit;
   }
+  a {
+    color: ${cssVar('primary')};
+    &:hover {
+      color: ${cssVar('primary-hover')};
+    }
+    &:active {
+      color: ${cssVar('primary-active')};
+    }
+  }
 `

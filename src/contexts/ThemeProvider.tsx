@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react'
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -9,19 +10,22 @@ import React, {
 } from 'react'
 import { shade } from 'polished'
 
+type Theme = 'light' | 'dark' | 'default'
+
 interface Props {
   children: React.ReactNode
+  initialTheme?: Theme
 }
 
 const useIsomorphicEffect =
   typeof window !== 'undefined' ? useEffect : useLayoutEffect
 
-type Theme = 'light' | 'dark' | 'default'
 const ThemeContext =
   createContext<{
     theme: Theme
     isDarkTheme: boolean
     setTheme(theme: Theme): void
+    toggle(): void
   } | null>(null)
 
 function checkIsDarkTheme() {
@@ -31,8 +35,8 @@ function checkIsDarkTheme() {
   ).matches
   return systemPrefersDark
 }
-export function ThemeProvider({ children }: Props) {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'default'>('default')
+export function ThemeProvider({ children, initialTheme = 'default' }: Props) {
+  const [theme, setTheme] = useState<'light' | 'dark' | 'default'>(initialTheme)
   const [systemIsDark, setSystemIsDark] = useState(() => checkIsDarkTheme())
 
   useIsomorphicEffect(() => {
@@ -60,8 +64,16 @@ export function ThemeProvider({ children }: Props) {
     return false
   }, [theme, systemIsDark])
 
+  const toggle = useCallback(() => {
+    if (isDarkTheme) {
+      setTheme('light')
+    } else {
+      setTheme('dark')
+    }
+  }, [isDarkTheme])
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, isDarkTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, isDarkTheme, toggle }}>
       {children}
       <Global styles={styles} />
     </ThemeContext.Provider>
@@ -101,6 +113,7 @@ export type ColorKey =
   | 'destructive'
   | 'destructive-hover'
   | 'destructive-active'
+  | 'slight-layer'
 
 export const cssVar = (key: ColorKey) => `var(--${key})`
 
@@ -131,6 +144,8 @@ const lightTheme = css`
   --destructive: #f44336;
   --destructive-hover: ${shade(0.1, '#f44336')};
   --destructive-active: ${shade(0.15, '#f44336')};
+
+  --slight-layer: rgba(0, 0, 0, 0.1);
 `
 
 const darkTheme = css`
@@ -161,6 +176,8 @@ const darkTheme = css`
   --destructive: #ff7b93;
   --destructive-hover: #f7677c;
   --destructive-active: #ee5464;
+
+  --slight-layer: rgba(255, 255, 255, 0.1);
 `
 
 const styles = css`

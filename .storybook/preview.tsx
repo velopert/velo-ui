@@ -25,13 +25,15 @@ export const parameters = {
 
 export const decorators = [
   (Story) => {
+    let theme: 'default' | 'dark' | 'light' = 'default'
     try {
       const data = JSON.parse(localStorage.getItem('sb-addon-themes-3'))
       document.body.dataset.theme = data.current
+      theme = data.current
     } catch (e) {}
 
     return (
-      <ThemeProvider>
+      <ThemeProvider initialTheme={theme}>
         <StorybookThemeWrapper>
           <GlobalStyles />
           <Story />

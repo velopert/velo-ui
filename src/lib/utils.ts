@@ -26,3 +26,7 @@ export function safelyAlterColor(
   }
   return alter(value)
 }
+
+export function isReactElement(el: any): el is React.ReactElement {
+  return !!el && !!el.type
+}
