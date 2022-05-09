@@ -3,6 +3,7 @@ import { GlobalStyles } from '../src/components/GlobalStyles'
 import { ThemeProvider } from '../src/contexts/ThemeProvider'
 import StorybookThemeWrapper from '../src/stories/StorybookThemeWrapper'
 import { themes } from '@storybook/theming'
+import './global.css'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -20,6 +21,7 @@ export const parameters = {
     dark: { ...themes.dark, appContentBg: '#121212', appBg: '#121212' },
     // Override the default light theme
     light: { ...themes.normal },
+    stylePreview: true,
   },
 }
 

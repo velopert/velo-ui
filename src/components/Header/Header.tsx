@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React, { useMemo } from 'react'
-import { cssVar, isReactElement } from '../..'
-
+import { isReactElement } from '../..'
+import { cssVar } from '../../contexts/ThemeProvider'
 interface HeaderProps {
   logo?: React.ReactNode
   /**

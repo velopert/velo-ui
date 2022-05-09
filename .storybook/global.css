@@ -1,0 +1,87 @@
+.docs-story {
+  background: var(--background);
+}
+
+#docs-root {
+  background: red;
+}
+
+.sbdocs {
+  background: var(--background) !important;
+  color: var(--accent-9) !important;
+}
+
+.sbdocs p code {
+  background: var(--background);
+  color: var(--accent-9);
+  border-color: var(--accent-4);
+}
+
+.sbdocs-title {
+  color: var(--accent-9) !important;
+}
+
+.docblock-argstable-head span {
+  color: var(--accent-9) !important;
+}
+
+.os-content {
+  background: var(--background);
+}
+
+.docblock-argstable-body td {
+  background: var(--background) !important;
+  color: var(--accent-7);
+}
+
+.docblock-argstable-body td code {
+  background: var(--background);
+  color: var(--accent-9);
+  border-color: var(--accent-4);
+}
+
+.css-ks2jcn {
+  background: var(--background) !important;
+  color: var(--accent-9) !important;
+  border-color: var(--accent-4) !important;
+}
+
+.docblock-code-toggle {
+  background: var(--background) !important;
+  color: var(--accent-9) !important;
+}
+
+.docblock-code-toggle--disabled {
+  background: var(--accent-1) !important;
+  color: var(--accent-9) !important;
+}
+
+.css-11xgcgt {
+  background: var(--accent-1) !important;
+  color: var(--accent-7) !important;
+}
+
+.sbdocs-preview {
+  box-shadow: none;
+  border: 1px solid var(--accent-4) !important;
+}
+
+.docblock-argstable-body textarea {
+  background: var(--background) !important;
+  color: var(--accent-9) !important;
+  border: 1px solid var(--accent-4) !important;
+}
+
+.docblock-argstable-body button {
+  background: var(--accent-2) !important;
+  color: var(--accent-9) !important;
+}
+
+.css-ozs5u1 span {
+  color: var(--accent-7) !important;
+}
+
+.css-ozs5u1 input:checked ~ span:last-of-type,
+.css-ozs5u1 input:not(:checked) ~ span:first-of-type {
+  color: var(--accent-1) !important;
+}
