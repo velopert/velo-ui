@@ -18,6 +18,7 @@ interface CheckboxProps
    * If you set className to this component it is applied to the `label` element which is the root element of this component.
    */
   className?: string
+  disabled?: boolean
 }
 
 /**
@@ -29,16 +30,18 @@ export function Checkbox({
   onToggle,
   size = 'sm',
   color = cssVar('primary'),
+  disabled,
 }: CheckboxProps) {
   return (
-    <label css={wrapper(color, size)} className={className}>
+    <label css={wrapper(color, size, disabled)} className={className}>
       <input
         type="checkbox"
         css={invisibleCheckbox}
         checked={checked}
         onChange={onToggle}
+        disabled={disabled}
       />
-      <span css={box(checked, color, size)} className="box">
+      <span css={box(checked, color)} className="box">
         {checked && <Icon name="check" />}
       </span>
 
@@ -53,18 +56,34 @@ const sizes = {
   lg: '1.5rem',
 }
 
-const wrapper = (color: string, size: CheckboxSize) => css`
+const wrapper = (color: string, size: CheckboxSize, disabled?: boolean) => css`
   position: relative;
   display: inline-flex;
   align-items: center;
 
-  cursor: pointer;
   font-size: ${sizes[size]};
-  &:hover {
-    span:first-of-type {
-      border-color: ${color};
-    }
-  }
+  ${disabled
+    ? css`
+        span:first-of-type {
+          border-color: ${cssVar('accent-4')};
+          background: ${cssVar('accent-3')};
+        }
+        span:nth-of-type(2) {
+          color: ${cssVar('accent-6')};
+        }
+        cursor: not-allowed;
+        svg {
+          color: ${cssVar('accent-6')};
+        }
+      `
+    : css`
+        cursor: pointer;
+        &:hover {
+          span:first-of-type {
+            border-color: ${color};
+          }
+        }
+      `}
 `
 const invisibleCheckbox = css`
   position: absolute;
@@ -75,7 +94,7 @@ const invisibleCheckbox = css`
   top: 0;
 `
 
-const box = (checked: boolean, color: string, size: CheckboxSize) => css`
+const box = (checked: boolean, color: string) => css`
   align-items: center;
   justify-content: center;
   display: block;

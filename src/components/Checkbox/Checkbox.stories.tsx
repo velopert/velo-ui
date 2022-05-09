@@ -18,16 +18,14 @@ const Template: CheckboxStory = (args) => {
   }, [args.checked])
 
   return (
-    <div>
-      <Checkbox
-        {...args}
-        checked={checked}
-        onToggle={() => {
-          setChecked(!checked)
-          args.onToggle()
-        }}
-      />
-    </div>
+    <Checkbox
+      {...args}
+      checked={checked}
+      onToggle={() => {
+        setChecked(!checked)
+        args.onToggle()
+      }}
+    />
   )
 }
 
@@ -40,7 +38,16 @@ Basic.argTypes = {
   onToggle: { action: 'onToggle' },
 }
 
-export const Size: CheckboxStory = () => {
+export const Disabled = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Disabled.args = {
+  disabled: true,
+}
+Disabled.argTypes = {
+  onToggle: { action: 'onToggle' },
+}
+
+const SizeTemplateZ: CheckboxStory = () => {
   const [checked, setChecked] = useState(false)
   const onToggle = () => setChecked(!checked)
   return (
@@ -69,3 +76,35 @@ export const Size: CheckboxStory = () => {
     </div>
   )
 }
+
+const SizeTemplate: CheckboxStory = (args) => {
+  const [checked, setChecked] = useState(false)
+  const onToggle = () => setChecked(!checked)
+  return (
+    <div
+      css={css`
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+      `}
+    >
+      <div>
+        <Checkbox size="sm" checked={checked} onToggle={onToggle}>
+          Small
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox size="md" checked={checked} onToggle={onToggle}>
+          Medium
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox size="lg" checked={checked} onToggle={onToggle}>
+          Large
+        </Checkbox>
+      </div>
+    </div>
+  )
+}
+
+export const Size = SizeTemplate.bind({})
