@@ -133,8 +133,8 @@ const lightTheme = css`
   --foreground: #121212;
 
   --primary: #009688;
-  --primary-hover: ${shade(0.1, '#009688')};
-  --primary-active: ${shade(0.15, '#009688')};
+  --primary-hover: #007e72;
+  --primary-active: #007267;
   --secondary: #c6e8e6;
   --secondary-hover: #b6e1de;
   --secondary-active: #a6dbd7;
@@ -142,8 +142,8 @@ const lightTheme = css`
   --secondary-element-text: #009688;
 
   --destructive: #f44336;
-  --destructive-hover: ${shade(0.1, '#f44336')};
-  --destructive-active: ${shade(0.15, '#f44336')};
+  --destructive-hover: #cd382d;
+  --destructive-active: #a62e25;
 
   --slight-layer: rgba(0, 0, 0, 0.1);
 `
