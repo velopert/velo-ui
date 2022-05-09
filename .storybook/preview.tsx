@@ -4,6 +4,7 @@ import { ThemeProvider } from '../src/contexts/ThemeProvider'
 import StorybookThemeWrapper from '../src/stories/StorybookThemeWrapper'
 import { themes } from '@storybook/theming'
 import './global.css'
+import { VeloProvider } from '../src'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -35,12 +36,12 @@ export const decorators = [
     } catch (e) {}
 
     return (
-      <ThemeProvider initialTheme={theme}>
+      <VeloProvider initialTheme={theme}>
         <StorybookThemeWrapper>
           <GlobalStyles />
           <Story />
         </StorybookThemeWrapper>
-      </ThemeProvider>
+      </VeloProvider>
     )
   },
 ]

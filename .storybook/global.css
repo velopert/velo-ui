@@ -85,3 +85,7 @@
 .css-ozs5u1 input:not(:checked) ~ span:first-of-type {
   color: var(--accent-1) !important;
 }
+
+.prismjs {
+  background: rgb(25, 25, 25) !important;
+}

@@ -10,7 +10,7 @@ import React, {
 } from 'react'
 import { shade } from 'polished'
 
-type Theme = 'light' | 'dark' | 'default'
+export type Theme = 'light' | 'dark' | 'default'
 
 interface Props {
   children: React.ReactNode
@@ -114,6 +114,7 @@ export type ColorKey =
   | 'destructive-hover'
   | 'destructive-active'
   | 'slight-layer'
+  | 'overlay'
 
 export const cssVar = (key: ColorKey) => `var(--${key})`
 
@@ -146,6 +147,7 @@ const lightTheme = css`
   --destructive-active: #a62e25;
 
   --slight-layer: rgba(0, 0, 0, 0.1);
+  --overlay: rgba(0, 0, 0, 0.4);
 `
 
 const darkTheme = css`
@@ -178,6 +180,7 @@ const darkTheme = css`
   --destructive-active: #ee5464;
 
   --slight-layer: rgba(255, 255, 255, 0.1);
+  --overlay: rgba(0, 0, 0, 0.7);
 `
 
 const styles = css`
