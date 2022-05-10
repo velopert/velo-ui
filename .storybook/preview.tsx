@@ -1,8 +1,10 @@
 import React from 'react'
-import GlobalStyles from '../src/components/GlobalStyles'
+import { GlobalStyles } from '../src/components/GlobalStyles'
 import { ThemeProvider } from '../src/contexts/ThemeProvider'
 import StorybookThemeWrapper from '../src/stories/StorybookThemeWrapper'
 import { themes } from '@storybook/theming'
+import './global.css'
+import { VeloProvider } from '../src'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -20,23 +22,26 @@ export const parameters = {
     dark: { ...themes.dark, appContentBg: '#121212', appBg: '#121212' },
     // Override the default light theme
     light: { ...themes.normal },
+    stylePreview: true,
   },
 }
 
 export const decorators = [
   (Story) => {
+    let theme: 'default' | 'dark' | 'light' = 'default'
     try {
       const data = JSON.parse(localStorage.getItem('sb-addon-themes-3'))
       document.body.dataset.theme = data.current
+      theme = data.current
     } catch (e) {}
 
     return (
-      <ThemeProvider>
+      <VeloProvider initialTheme={theme}>
         <StorybookThemeWrapper>
           <GlobalStyles />
           <Story />
         </StorybookThemeWrapper>
-      </ThemeProvider>
+      </VeloProvider>
     )
   },
 ]

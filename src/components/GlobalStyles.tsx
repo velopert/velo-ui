@@ -1,6 +1,7 @@
 import { Global, css } from '@emotion/react'
+import { cssVar } from '..'
 
-function GlobalStyles() {
+export function GlobalStyles() {
   return <Global styles={styles} />
 }
 
@@ -10,10 +11,18 @@ const styles = css`
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
     box-sizing: border-box;
+    background: ${cssVar('background')};
   }
   * {
     box-sizing: inherit;
   }
+  a {
+    color: ${cssVar('primary')};
+    &:hover {
+      color: ${cssVar('primary-hover')};
+    }
+    &:active {
+      color: ${cssVar('primary-active')};
+    }
+  }
 `
-
-export default GlobalStyles

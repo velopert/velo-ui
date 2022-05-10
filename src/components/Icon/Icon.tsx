@@ -3,7 +3,7 @@ import * as vectors from './vectors'
 
 type IconName = keyof typeof vectors
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'css'> {
   name: IconName
 }
 

@@ -42,6 +42,10 @@ const styles = css`
       border-color: ${cssVar('accent-4')};
     }
   }
+
+  .os-content {
+    background: white !important;
+  }
 `
 
 export default DocsDarkThemeCompat
