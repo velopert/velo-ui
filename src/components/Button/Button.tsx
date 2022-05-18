@@ -93,6 +93,10 @@ interface ButtonProps
    * Sets width equal to height
    */
   isSquare?: boolean
+  /**
+   * Sets marginTop style of button
+   */
+  marginTop?: string | number
 }
 
 /**
@@ -116,6 +120,7 @@ export function Button({
   asLink,
   href,
   isSquare,
+  marginTop,
   ...rest
 }: ButtonProps) {
   const { isDarkTheme } = useTheme()
@@ -132,6 +137,10 @@ export function Button({
     variant === 'outline' && outlineStyle(scheme),
     variant === 'ghost' && ghostStyle(themeColor, isDarkTheme),
     isFullWidth && fullWidthStyle,
+    marginTop &&
+      css`
+        margin-top: ${marginTop};
+      `,
   ]
 
   const contents = (

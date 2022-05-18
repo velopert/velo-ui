@@ -1,21 +1,22 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 
 interface Props {
   children?: React.ReactNode
 }
 
+function isSSR() {
+  return typeof window === 'undefined' || typeof document === 'undefined'
+}
 export function VeloPortal({ children }: Props) {
-  const el = useMemo(() => {
-    // block on SSR
-    if (typeof window === 'undefined' || typeof document === 'undefined')
-      return null
-    try {
-      return document.getElementById('velo-portal')
-    } catch (e) {
-      return null
+  const el = useMemo(() => (isSSR() ? null : document.createElement('div')), [])
+  useEffect(() => {
+    if (!el) return
+    document.body.appendChild(el)
+    return () => {
+      document.body.removeChild(el)
     }
-  }, [])
+  }, [el])
 
   if (!el) return null
   return createPortal(children, el)

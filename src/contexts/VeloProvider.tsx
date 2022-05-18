@@ -7,10 +7,5 @@ interface Props {
 }
 
 export function VeloProvider({ children, initialTheme }: Props) {
-  return (
-    <ThemeProvider initialTheme={initialTheme}>
-      {children}
-      <div id="velo-portal" style={{ zIndex: 10 }}></div>
-    </ThemeProvider>
-  )
+  return <ThemeProvider initialTheme={initialTheme}>{children}</ThemeProvider>
 }

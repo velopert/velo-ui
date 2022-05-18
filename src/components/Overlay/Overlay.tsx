@@ -18,7 +18,6 @@ export function Overlay({ visible }: Props) {
     enter: { opacity: 1 },
     leave: { opacity: 0, pointerEvents: 'none' },
     reverse: visible,
-    delay: 150,
   })
 
   return transitions((styles, item) =>

@@ -8,7 +8,6 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { shade } from 'polished'
 
 export type Theme = 'light' | 'dark' | 'default'
 
@@ -115,6 +114,7 @@ export type ColorKey =
   | 'destructive-active'
   | 'slight-layer'
   | 'overlay'
+  | 'background-modal'
 
 export const cssVar = (key: ColorKey) => `var(--${key})`
 
@@ -148,13 +148,14 @@ const lightTheme = css`
 
   --slight-layer: rgba(0, 0, 0, 0.1);
   --overlay: rgba(0, 0, 0, 0.4);
+  --background-modal: #ffffff;
 `
 
 const darkTheme = css`
   --background: #121212;
   --background-secondary: #121212;
   --accent-0: #1b1b1b;
-  --accent-1: #252525;
+  --accent-1: #020202;
   --accent-2: #2e2e2e;
   --accent-3: #3d3d3d;
   --accent-4: #5b5b5b;
@@ -181,6 +182,7 @@ const darkTheme = css`
 
   --slight-layer: rgba(255, 255, 255, 0.1);
   --overlay: rgba(0, 0, 0, 0.7);
+  --background-modal: #1b1b1b;
 `
 
 const styles = css`

@@ -1,7 +1,7 @@
 import { jsx } from '@emotion/core'
 import { css } from '@emotion/react'
 import React, { useMemo } from 'react'
-import { ColorKey } from '../../contexts/ThemeProvider'
+import { ColorKey, cssVar } from '../../contexts/ThemeProvider'
 
 export interface TextProps {
   as?:
@@ -40,6 +40,7 @@ export function Text({
   className,
   truncate,
   clamp,
+  color,
 }: TextProps) {
   const fontSize = useMemo(() => `${size / 16}rem`, [size])
 
@@ -52,6 +53,7 @@ export function Text({
           fontSize,
           fontWeight: weight,
           textAlign: align,
+          color: color ? cssVar(color) : undefined,
         }),
         textStyle,
         truncate && truncateStyle,

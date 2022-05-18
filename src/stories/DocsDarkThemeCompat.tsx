@@ -46,6 +46,10 @@ const styles = css`
   .os-content {
     background: white !important;
   }
+
+  .prismjs {
+    background: white !important;
+  }
 `
 
 export default DocsDarkThemeCompat
