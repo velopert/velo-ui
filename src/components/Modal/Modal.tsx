@@ -20,6 +20,7 @@ interface Props {
    */
   className?: string
   children?: React.ReactNode
+  style?: React.CSSProperties
 }
 
 const transitions = {
@@ -50,7 +51,12 @@ const transitions = {
 /**
  * Modal component interupts user's workflow and provides a way to interact with the user.
  */
-export function Modal({ visible, children, transitionType = 'pop' }: Props) {
+export function Modal({
+  visible,
+  children,
+  transitionType = 'pop',
+  className,
+}: Props) {
   const transition = useTransition(visible, {
     ...transitions[transitionType],
     reverse: visible,
@@ -63,7 +69,11 @@ export function Modal({ visible, children, transitionType = 'pop' }: Props) {
         {transition((animatedStyle, item) =>
           item ? (
             <div css={styles.positioner}>
-              <animated.div style={animatedStyle} css={styles.modal}>
+              <animated.div
+                style={animatedStyle}
+                css={styles.modal}
+                className={className}
+              >
                 {children}
               </animated.div>
             </div>
@@ -88,5 +98,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     width: auto;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   `,
 }
