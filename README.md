@@ -9,3 +9,9 @@ This project aims to achieve these three major objectives:
 - Should be easily customizable.
 
 > This project is work in progress. Feel free to contribute or request new features.
+
+## Installation
+
+```bash
+$ yarn add @emotion/react velo-ui
+```
